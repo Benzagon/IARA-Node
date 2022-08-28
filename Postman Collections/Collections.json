@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "6dbc729b-5dcd-48c4-afc3-1e448cfce759",
 		"name": "Proyecto tuberculosis",
-		"description": "Esta colección contiene dos carpetas. Una donde incluiremos y probaremos el funcionamiento de las rutas creadas con express. En la otra, encontraremos el funcionamiento de las rutas creadas con flask",
+		"description": "Esta colección contiene dos carpetas. Una donde incluiremos y probaremos el funcionamiento de las rutas creadas con express. En la otra, encontraremos el funcionamiento de las rutas creadas con flask.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -14,7 +14,7 @@
 					"item": [
 						{
 							"name": "Subir imagenes",
-							"_postman_id": "60c21752-7e16-489f-bb45-57cf32ca026f",
+							"id": "60c21752-7e16-489f-bb45-57cf32ca026f",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -45,10 +45,7 @@
 											"type": "file",
 											"src": "/D:/Desktop/795ccf472b0139e07435867e1024309b.gif"
 										}
-									],
-									"options": {
-										"formdata": {}
-									}
+									]
 								},
 								"url": "http://localhost:4000/images/upload"
 							},
@@ -56,7 +53,7 @@
 						},
 						{
 							"name": "Obtener Imagenes",
-							"_postman_id": "a8e0cc05-b69c-426f-b7c5-a7111b7ff10a",
+							"id": "a8e0cc05-b69c-426f-b7c5-a7111b7ff10a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -69,7 +66,7 @@
 						},
 						{
 							"name": "Obtener una sola imagen",
-							"_postman_id": "f7a58d09-ac3d-4eb7-9237-7396a2762405",
+							"id": "f7a58d09-ac3d-4eb7-9237-7396a2762405",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -82,7 +79,7 @@
 						},
 						{
 							"name": "Editar imagen",
-							"_postman_id": "709041b6-428d-4e99-a59e-6f5dfdb2427c",
+							"id": "709041b6-428d-4e99-a59e-6f5dfdb2427c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -104,7 +101,7 @@
 						},
 						{
 							"name": "Eliminar imagen",
-							"_postman_id": "6873cb66-4a19-4657-a9f6-3ebf8dcbe001",
+							"id": "6873cb66-4a19-4657-a9f6-3ebf8dcbe001",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -126,28 +123,26 @@
 						},
 						{
 							"name": "Buscar imagen",
-							"_postman_id": "3a7f0787-0219-4154-a8c8-6395039e4a00",
+							"id": "3a7f0787-0219-4154-a8c8-6395039e4a00",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
-								"url": null
+								"header": []
 							},
 							"response": []
 						}
 					],
-					"_postman_id": "f8bc3787-33ce-4586-b1af-194c6f6d40a1",
-					"description": "Esta carpeta está destinada a contener las rutas relacionadas con las imagenes",
-					"_postman_isSubFolder": true
+					"id": "f8bc3787-33ce-4586-b1af-194c6f6d40a1",
+					"description": "Esta carpeta está destinada a contener las rutas relacionadas con las imagenes"
 				},
 				{
 					"name": "Patient",
 					"item": [
 						{
 							"name": "Subir paciente",
-							"_postman_id": "15ac2f84-bf64-470d-9dff-7bec51a1e340",
+							"id": "15ac2f84-bf64-470d-9dff-7bec51a1e340",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -175,7 +170,7 @@
 						},
 						{
 							"name": "Obtener pacientes",
-							"_postman_id": "738c5757-d3b3-4092-8c27-c9ca6433628c",
+							"id": "738c5757-d3b3-4092-8c27-c9ca6433628c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -194,7 +189,7 @@
 						},
 						{
 							"name": "Obtener un solo paciente",
-							"_postman_id": "6f4c125e-a693-4f36-b608-cc717aaad173",
+							"id": "6f4c125e-a693-4f36-b608-cc717aaad173",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -213,7 +208,7 @@
 						},
 						{
 							"name": "Editar paciente",
-							"_postman_id": "66bb9b1b-1bda-49c7-b4d0-b34458dacb4a",
+							"id": "66bb9b1b-1bda-49c7-b4d0-b34458dacb4a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -241,7 +236,7 @@
 						},
 						{
 							"name": "Eliminar paciente",
-							"_postman_id": "580c7a19-5287-487d-aac2-f0cf653c8af6",
+							"id": "580c7a19-5287-487d-aac2-f0cf653c8af6",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -260,7 +255,7 @@
 						},
 						{
 							"name": "Buscar paciente",
-							"_postman_id": "de867529-f735-4c00-9aec-041e77b60301",
+							"id": "de867529-f735-4c00-9aec-041e77b60301",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -299,16 +294,15 @@
 							"response": []
 						}
 					],
-					"_postman_id": "06c3ccbd-3e8f-4704-accd-58883dd47949",
-					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los pacientes",
-					"_postman_isSubFolder": true
+					"id": "06c3ccbd-3e8f-4704-accd-58883dd47949",
+					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los pacientes"
 				},
 				{
 					"name": "User",
 					"item": [
 						{
 							"name": "Registro",
-							"_postman_id": "398bc0af-b022-49c2-9e41-b25467a01750",
+							"id": "398bc0af-b022-49c2-9e41-b25467a01750",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -330,7 +324,7 @@
 						},
 						{
 							"name": "Inicio de sesión",
-							"_postman_id": "a7c18c18-0690-4743-a072-8546bb4571f6",
+							"id": "a7c18c18-0690-4743-a072-8546bb4571f6",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -352,7 +346,7 @@
 						},
 						{
 							"name": "Refresh Token",
-							"_postman_id": "a701b717-725e-4fee-9c56-73da66e2f81b",
+							"id": "a701b717-725e-4fee-9c56-73da66e2f81b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -389,7 +383,7 @@
 						},
 						{
 							"name": "Logout",
-							"_postman_id": "cadb54f2-2826-4200-b9f9-b65a33b29d3e",
+							"id": "cadb54f2-2826-4200-b9f9-b65a33b29d3e",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -401,18 +395,17 @@
 							"response": []
 						}
 					],
-					"_postman_id": "9b9c7a57-05ed-4f2e-97ee-3524077a46c6",
-					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los usuarios",
-					"_postman_isSubFolder": true
+					"id": "9b9c7a57-05ed-4f2e-97ee-3524077a46c6",
+					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los usuarios"
 				}
 			],
-			"_postman_id": "3099bc33-cac7-413d-a091-59afd369007b",
+			"id": "3099bc33-cac7-413d-a091-59afd369007b",
 			"description": "Principal API de la web"
 		},
 		{
 			"name": "API - Flask",
 			"item": [],
-			"_postman_id": "0291c722-07e0-4067-810c-abaab5c0e561"
+			"id": "0291c722-07e0-4067-810c-abaab5c0e561"
 		}
 	]
 }
