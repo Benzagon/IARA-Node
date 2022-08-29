@@ -339,7 +339,7 @@
 									}
 								},
 								"url": "http://localhost:4000/user/signin",
-								"description": "."
+								"description": "...."
 							},
 							"response": []
 						},
