@@ -404,7 +404,20 @@
 		},
 		{
 			"name": "API - Flask",
-			"item": [],
+			"item": [
+				{
+					"name": "New Request",
+					"id": "04348650-e555-4493-a3dc-fc4974cb7d0f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
 			"id": "0291c722-07e0-4067-810c-abaab5c0e561"
 		}
 	]
