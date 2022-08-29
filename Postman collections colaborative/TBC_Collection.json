@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "4189c17b-da8d-4239-9b56-9fbfa5c50839",
+		"name": "Proyecto tuberculosis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API - Express",
+			"item": [
+				{
+					"name": "Images",
+					"item": [
+						{
+							"name": "Subir imagenes",
+							"_postman_id": "21e3876c-8f17-4731-b3df-4197c5f80220",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "hola",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "chau",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Desktop/795ccf472b0139e07435867e1024309b.gif"
+										}
+									],
+									"options": {}
+								},
+								"url": "http://localhost:4000/images/upload"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener imagenes",
+							"_postman_id": "53be077a-4448-410b-ac78-9f2154b0a037",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:4000/images"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener una sola imagen",
+							"_postman_id": "23277bcd-1701-4378-a2f3-5b5b1b92165c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:4000/images/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar imagen",
+							"_postman_id": "9c3150c0-2efb-4680-a694-3acb1735b8f3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"La imagen de Luis\",\r\n    \"description\": \"Diagnóstico de Luis\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/images/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar imagen",
+							"_postman_id": "33a34408-466e-4814-b8c4-7b8dbd5aa765",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/images/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar imagen",
+							"_postman_id": "fc7c8dc2-3a5a-406a-94b2-9c487610afb2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_id": "bd4427e6-0000-42c5-b92a-ea43a353e10a",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Patient",
+					"item": [
+						{
+							"name": "Subir paciente",
+							"_postman_id": "ddef1a5c-59ea-4548-887c-e2a9175c41f4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTY2MTI5Nzc5MCwiZXhwIjoxNjYxMjk3OTEwfQ.cXgs8kgJzSI8BuY2H5i7emxBo0rn29JZw1eVHgJ49cg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DNI\": \"32345054\",\r\n    \"firstName\": \"Juan\",\r\n    \"lastName\": \"Choiue\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/patient/upload"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener pacientes",
+							"_postman_id": "ac55c9ce-be14-40c3-9d03-fbe52fea680a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlBlcGVTYW5kQGdtYWlsLmNvbSIsImlkIjoxMSwiaWF0IjoxNjYxMTcyMjA5LCJleHAiOjE2NjExNzIyMzl9.anETTuvUtdO_lwNTxtWzsn3yCjkfX9qMMUFfKqbwxGM",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:4000/patient"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener un solo paciente",
+							"_postman_id": "08dd95eb-4993-44cb-9b8e-b8129417aaf9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlBlcGVTYW5kQGdtYWlsLmNvbSIsImlkIjoxMSwiaWF0IjoxNjYxMTcyMjQ5LCJleHAiOjE2NjExNzIyNzl9.pCQLO2RVYDxA-jaXJ8TRLXJn2JzuP2Xt2TEpAGNhDL4",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:4000/patient/33"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar paciente",
+							"_postman_id": "a2c8e7ef-ab11-4335-96da-e8410ab139c8",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlBlcGVTYW5kQGdtYWlsLmNvbSIsImlkIjoxMSwiaWF0IjoxNjYxMTcyODQxLCJleHAiOjE2NjExNzI4NzF9.vQyN-9kSZOjcvat599Jd4mGDSGLD-cMS-D6CgD-caK8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"DNI\": \"21345678\",\r\n    \"firstName\": \"Manuel\",\r\n    \"lastName\": \"Grip\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/patient/31"
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar paciente",
+							"_postman_id": "81c16ee5-f3a3-47cd-ab04-2866ce00ec0b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlBlcGVTYW5kQGdtYWlsLmNvbSIsImlkIjoxMSwiaWF0IjoxNjYxMTcyOTQ2LCJleHAiOjE2NjExNzI5NzZ9.EQEeyeLVwxF5TCxZ6RDxCTyFUdsNZnc3mk_0F6obzu4",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:4000/patient/30"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar paciente",
+							"_postman_id": "fd981067-5ce3-4162-898d-8dc706a4eb49",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2MjA5MiwiZXhwIjoxNjYxMzYyMjEyfQ.prDLJKdNuOrUh0gIb-o2XQZpLHGh0wgJ_lgOE_oh1kA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/patient/search?firstName=&lastName=santarelli",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"patient",
+										"search"
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": ""
+										},
+										{
+											"key": "lastName",
+											"value": "santarelli"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_id": "4cf3db6f-07b9-48dd-aa5e-1ba9bf5fe3f4",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Registro",
+							"_postman_id": "1a90b7ce-e3c8-4bc5-8ba6-6da6771de811",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\" : \"Manuel\", \r\n    \"lastName\": \"Rodriguez\", \r\n    \"email\": \"ManuRodriguez@gmail.com\", \r\n    \"password\": \"Juan1234\",\r\n    \"doctorId\": \"345908\",\r\n    \"HospitalName\": \"HelfHospital\",\r\n    \"HospitalEmail\": \"HelfHospital@est.edu.ar\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/user/signup"
+							},
+							"response": []
+						},
+						{
+							"name": "Inicio de sesión",
+							"_postman_id": "135fc837-e30a-421b-8ead-3b2dc200d62a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"ManuRodriguez@gmail.com\", \r\n    \"password\": \"Juan1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/user/signin"
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token",
+							"_postman_id": "0bffb55e-2cf3-425a-a32d-d89ea1c61039",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2Mjc4MywiZXhwIjoxNjYxMzYzMDgzfQ.0SNDbD6Q1UbXKzkTYauhfGj_vpg215EU013OgoqDL48",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/user/refreshToken?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2MjA5MiwiZXhwIjoxNjYxMzYyMjEyfQ.prDLJKdNuOrUh0gIb-o2XQZpLHGh0wgJ_lgOE_oh1kA",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"user",
+										"refreshToken"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2MjA5MiwiZXhwIjoxNjYxMzYyMjEyfQ.prDLJKdNuOrUh0gIb-o2XQZpLHGh0wgJ_lgOE_oh1kA"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"_postman_id": "cb591820-57f1-4230-ad0e-f25e1cbfc4ba",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:4000/user/logout"
+							},
+							"response": []
+						}
+					],
+					"_postman_id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236",
+					"_postman_isSubFolder": true
+				}
+			],
+			"_postman_id": "0898ed5c-986b-4cb3-af6a-8846573328af"
+		},
+		{
+			"name": "API - Flask",
+			"item": [
+				{
+					"name": "Prueba_Flask_luis",
+					"_postman_id": "ca0a3ccd-0b20-49b6-a28c-e7420a03dec8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "0d89df27-ab85-43c0-ab53-75c79aff413a"
+		}
+	]
+}
