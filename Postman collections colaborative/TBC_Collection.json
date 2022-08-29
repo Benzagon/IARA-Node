@@ -13,7 +13,7 @@
 					"item": [
 						{
 							"name": "Subir imagenes",
-							"_postman_id": "21e3876c-8f17-4731-b3df-4197c5f80220",
+							"id": "21e3876c-8f17-4731-b3df-4197c5f80220",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -44,8 +44,7 @@
 											"type": "file",
 											"src": "/D:/Desktop/795ccf472b0139e07435867e1024309b.gif"
 										}
-									],
-									"options": {}
+									]
 								},
 								"url": "http://localhost:4000/images/upload"
 							},
@@ -53,7 +52,7 @@
 						},
 						{
 							"name": "Obtener imagenes",
-							"_postman_id": "53be077a-4448-410b-ac78-9f2154b0a037",
+							"id": "53be077a-4448-410b-ac78-9f2154b0a037",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -66,7 +65,7 @@
 						},
 						{
 							"name": "Obtener una sola imagen",
-							"_postman_id": "23277bcd-1701-4378-a2f3-5b5b1b92165c",
+							"id": "23277bcd-1701-4378-a2f3-5b5b1b92165c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -79,7 +78,7 @@
 						},
 						{
 							"name": "Editar imagen",
-							"_postman_id": "9c3150c0-2efb-4680-a694-3acb1735b8f3",
+							"id": "9c3150c0-2efb-4680-a694-3acb1735b8f3",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -101,7 +100,7 @@
 						},
 						{
 							"name": "Eliminar imagen",
-							"_postman_id": "33a34408-466e-4814-b8c4-7b8dbd5aa765",
+							"id": "33a34408-466e-4814-b8c4-7b8dbd5aa765",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -123,7 +122,7 @@
 						},
 						{
 							"name": "Buscar imagen",
-							"_postman_id": "fc7c8dc2-3a5a-406a-94b2-9c487610afb2",
+							"id": "fc7c8dc2-3a5a-406a-94b2-9c487610afb2",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -135,15 +134,14 @@
 							"response": []
 						}
 					],
-					"_postman_id": "bd4427e6-0000-42c5-b92a-ea43a353e10a",
-					"_postman_isSubFolder": true
+					"id": "bd4427e6-0000-42c5-b92a-ea43a353e10a"
 				},
 				{
 					"name": "Patient",
 					"item": [
 						{
 							"name": "Subir paciente",
-							"_postman_id": "ddef1a5c-59ea-4548-887c-e2a9175c41f4",
+							"id": "ddef1a5c-59ea-4548-887c-e2a9175c41f4",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -171,7 +169,7 @@
 						},
 						{
 							"name": "Obtener pacientes",
-							"_postman_id": "ac55c9ce-be14-40c3-9d03-fbe52fea680a",
+							"id": "ac55c9ce-be14-40c3-9d03-fbe52fea680a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -190,7 +188,7 @@
 						},
 						{
 							"name": "Obtener un solo paciente",
-							"_postman_id": "08dd95eb-4993-44cb-9b8e-b8129417aaf9",
+							"id": "08dd95eb-4993-44cb-9b8e-b8129417aaf9",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -209,7 +207,7 @@
 						},
 						{
 							"name": "Editar paciente",
-							"_postman_id": "a2c8e7ef-ab11-4335-96da-e8410ab139c8",
+							"id": "a2c8e7ef-ab11-4335-96da-e8410ab139c8",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -237,7 +235,7 @@
 						},
 						{
 							"name": "Eliminar paciente",
-							"_postman_id": "81c16ee5-f3a3-47cd-ab04-2866ce00ec0b",
+							"id": "81c16ee5-f3a3-47cd-ab04-2866ce00ec0b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -256,7 +254,7 @@
 						},
 						{
 							"name": "Buscar paciente",
-							"_postman_id": "fd981067-5ce3-4162-898d-8dc706a4eb49",
+							"id": "fd981067-5ce3-4162-898d-8dc706a4eb49",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -295,15 +293,14 @@
 							"response": []
 						}
 					],
-					"_postman_id": "4cf3db6f-07b9-48dd-aa5e-1ba9bf5fe3f4",
-					"_postman_isSubFolder": true
+					"id": "4cf3db6f-07b9-48dd-aa5e-1ba9bf5fe3f4"
 				},
 				{
 					"name": "User",
 					"item": [
 						{
 							"name": "Registro",
-							"_postman_id": "1a90b7ce-e3c8-4bc5-8ba6-6da6771de811",
+							"id": "1a90b7ce-e3c8-4bc5-8ba6-6da6771de811",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -325,7 +322,7 @@
 						},
 						{
 							"name": "Inicio de sesión",
-							"_postman_id": "135fc837-e30a-421b-8ead-3b2dc200d62a",
+							"id": "135fc837-e30a-421b-8ead-3b2dc200d62a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -341,13 +338,14 @@
 										}
 									}
 								},
-								"url": "http://localhost:4000/user/signin"
+								"url": "http://localhost:4000/user/signin",
+								"description": "."
 							},
 							"response": []
 						},
 						{
 							"name": "Refresh Token",
-							"_postman_id": "0bffb55e-2cf3-425a-a32d-d89ea1c61039",
+							"id": "0bffb55e-2cf3-425a-a32d-d89ea1c61039",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -383,7 +381,7 @@
 						},
 						{
 							"name": "Logout",
-							"_postman_id": "cb591820-57f1-4230-ad0e-f25e1cbfc4ba",
+							"id": "cb591820-57f1-4230-ad0e-f25e1cbfc4ba",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -395,30 +393,28 @@
 							"response": []
 						}
 					],
-					"_postman_id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236",
-					"_postman_isSubFolder": true
+					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236"
 				}
 			],
-			"_postman_id": "0898ed5c-986b-4cb3-af6a-8846573328af"
+			"id": "0898ed5c-986b-4cb3-af6a-8846573328af"
 		},
 		{
 			"name": "API - Flask",
 			"item": [
 				{
 					"name": "Prueba_Flask_luis",
-					"_postman_id": "ca0a3ccd-0b20-49b6-a28c-e7420a03dec8",
+					"id": "ca0a3ccd-0b20-49b6-a28c-e7420a03dec8",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": null
+						"header": []
 					},
 					"response": []
 				}
 			],
-			"_postman_id": "0d89df27-ab85-43c0-ab53-75c79aff413a"
+			"id": "0d89df27-ab85-43c0-ab53-75c79aff413a"
 		}
 	]
 }
