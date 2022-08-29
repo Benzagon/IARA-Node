@@ -311,7 +311,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\" : \"Manuel\", \r\n    \"lastName\": \"Rodriguez\", \r\n    \"email\": \"ManuRodriguez@gmail.com\", \r\n    \"password\": \"Juan1234\",\r\n    \"doctorId\": \"345908\",\r\n    \"HospitalName\": \"HelfHospital\",\r\n    \"HospitalEmail\": \"HelfHospital@est.edu.ar\"\r\n}",
+									"raw": "{\r\n    \"firstName\" : \"Pollo\", \r\n    \"lastName\": \"Vignolo\", \r\n    \"email\": \"PolloVignolo@gmail.com\", \r\n    \"password\": \"Pollo1234\",\r\n    \"doctorId\": \"456908\",\r\n    \"HospitalName\": \"PolloHospital\",\r\n    \"HospitalEmail\": \"PolloHospital@est.edu.ar\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
