@@ -23,6 +23,9 @@ app.use(imageRoutes);
 app.use('/user', userRoutes)
 app.use(patientRoutes)
 
+app.get("/", (req,res) => {
+    res.json({status: "active"})
+})
 
 //Server on port...
 app.listen(PORT);
