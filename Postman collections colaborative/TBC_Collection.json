@@ -415,7 +415,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Prueba Flask ia",
 					"id": "5fafeaf0-8290-4261-9e11-69a2d6c87ace",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
