@@ -7,8 +7,6 @@ const authJwt = async (req, res, next) => {
 
     const token = req.cookies.AccessToken;
 
-    console.log(req.cookies.AccessToken)
-
     if (!token)return res.status(403).json({ message: "El token no fue recibido" });
 
     const decoded = jwt.verify(token, process.env.SECRET);
