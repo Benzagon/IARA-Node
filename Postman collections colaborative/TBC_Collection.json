@@ -87,14 +87,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"La imagen de Luis\",\r\n    \"description\": \"Diagnóstico de Luis\"\r\n}",
+									"raw": "{\r\n    \"title\": \"La imagen de Lui\",\r\n    \"description\": \"Diagnóstico de Luis\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:4000/images/1"
+								"url": "http://localhost:4000/images/"
 							},
 							"response": []
 						},
