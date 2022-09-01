@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "4189c17b-da8d-4239-9b56-9fbfa5c50839",
 		"name": "Proyecto tuberculosis",
-		"description": "StartFragment\n\nEsta colección contiene dos carpetas. Una donde incluiremos y probaremos el funcionamiento de las rutas creadas con express. En la otra, encontraremos el funcionamiento de las rutas creadas con flask.\n\nEndFragment",
+		"description": "Esta colección contiene dos carpetas. Una donde incluiremos y probaremos el funcionamiento de las rutas creadas con express. En la otra, encontraremos el funcionamiento de las rutas creadas con flask.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
