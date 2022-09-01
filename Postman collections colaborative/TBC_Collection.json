@@ -408,7 +408,8 @@
 							"response": []
 						}
 					],
-					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236"
+					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236",
+					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los usuarios."
 				}
 			],
 			"id": "0898ed5c-986b-4cb3-af6a-8846573328af",
