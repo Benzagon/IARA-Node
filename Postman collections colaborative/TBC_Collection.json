@@ -47,7 +47,8 @@
 										}
 									]
 								},
-								"url": "http://localhost:4000/images/upload"
+								"url": "http://localhost:4000/images/upload",
+								"description": "Esta ruta esta destinada a simular la subida de imagenes"
 							},
 							"response": []
 						},
