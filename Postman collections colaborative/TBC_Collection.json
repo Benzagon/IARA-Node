@@ -295,7 +295,8 @@
 							"response": []
 						}
 					],
-					"id": "4cf3db6f-07b9-48dd-aa5e-1ba9bf5fe3f4"
+					"id": "4cf3db6f-07b9-48dd-aa5e-1ba9bf5fe3f4",
+					"description": "Esta carpeta está destinada a contener las rutas relacionadas con los pacientes."
 				},
 				{
 					"name": "User",
