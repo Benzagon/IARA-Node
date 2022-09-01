@@ -1,5 +1,4 @@
 import { pool } from '../db.js'
-import { v4 as uuidv4 } from 'uuid';
 
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
@@ -14,7 +13,7 @@ export const uploadImage = async (req, res) => {
 
 
         //Mandar la info a la db
-        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img) VALUES (?, ?, ?, ?)", [filename, title, description, 'http://localhost:4000/images/' + filename])
+        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img) VALUES (?, ?, ?, ?)", [filename, title, description, path])
 
         console.log(result)
 
