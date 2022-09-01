@@ -392,6 +392,18 @@
 								"url": "http://localhost:4000/user/logout"
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"id": "182e9864-96c3-4119-be09-2f2f95eb3561",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					],
 					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236"
