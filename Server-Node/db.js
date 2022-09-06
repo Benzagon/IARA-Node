@@ -5,6 +5,5 @@ export const pool = createPool({
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
-}, () => {
-    console.log("connected to db successfully :)")
-})
+}, console.log("Db connected"))
+

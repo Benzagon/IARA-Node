@@ -17,9 +17,9 @@ export const uploadImage = async (req, res) => {
 
         console.log(result)
 
-        const date = new Date().toString();
+        //const date = new Date().toString();
 
-        res.json({id: result.insertId, title, description, filename, path, date})
+        res.json({id: result.insertId, title, description, filename, path})
 
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -72,7 +72,7 @@ export const updateImage = async (req, res) => {
 
         const [result] = await pool.query("UPDATE radiografias SET titulo_img = ?, descripcion_img = ? WHERE id = ?", [title, description, id])
     
-        res.json(result)
+        return res.json({message: "El paciente ha sido actualizado con éxito"})
     } catch (error) {
         console.log(error)
         return res.status(500).json({message: error.message})
@@ -90,7 +90,7 @@ export const deleteImage = async (req, res) => {
             return res.status(404).json({message: "La imagen no fue encontrada"})
         }
 
-        return res.sendStatus(204)
+        return res.sendStatus(204).json({message: "La imagen ha sido eliminada correctamente"})
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
