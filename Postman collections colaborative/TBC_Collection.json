@@ -403,8 +403,9 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"url": "http://localhost:4000/user/forgotPassword"
 							},
 							"response": []
 						}
