@@ -313,7 +313,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\" : \"Manuel\", \r\n    \"lastName\": \"Rodriguez\", \r\n    \"email\": \"ManuRodriguez@gmail.com\", \r\n    \"password\": \"Juan1234\",\r\n    \"doctorId\": \"345908\",\r\n    \"HospitalName\": \"HelfHospital\",\r\n    \"HospitalEmail\": \"HelfHospital@est.edu.ar\"\r\n}",
+									"raw": "{\r\n    \"firstName\" : \"Tinta\", \r\n    \"lastName\": \"Rodriguez\", \r\n    \"email\": \"TintaRodriguez@gmail.com\", \r\n    \"password\": \"Tin1234\",\r\n    \"doctorId\": \"335908\",\r\n    \"HospitalName\": \"TintaHospital\",\r\n    \"HospitalEmail\": \"TintaHospital@est.edu.ar\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
