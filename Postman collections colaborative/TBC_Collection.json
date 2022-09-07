@@ -421,7 +421,7 @@
 			"name": "API - Flask",
 			"item": [
 				{
-					"name": "Prueba_Flask",
+					"name": "Obtener predicción",
 					"id": "ca0a3ccd-0b20-49b6-a28c-e7420a03dec8",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
