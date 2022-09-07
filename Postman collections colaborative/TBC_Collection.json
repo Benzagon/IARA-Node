@@ -427,8 +427,19 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imagefile",
+									"type": "file",
+									"src": "/C:/Users/47205114/Documents/GitHub/ML-api/images/Tuberculosis-700.png"
+								}
+							]
+						},
+						"url": "localhost:5000/predict"
 					},
 					"response": []
 				},
