@@ -33,17 +33,19 @@
 										{
 											"key": "title",
 											"value": "hola",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "description",
 											"value": "chau",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/47205114/Pictures/Camera Roll/WIN_20220317_11_24_18_Pro.jpg"
+											"src": "/D:/Imagenes/imagenCovid2.jpg"
 										}
 									]
 								},
