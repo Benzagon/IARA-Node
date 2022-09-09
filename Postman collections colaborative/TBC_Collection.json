@@ -273,7 +273,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:4000/patient/search?firstName=&lastName=santarelli",
+									"raw": "http://localhost:4000/patient/search?firstName=R&lastName=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -286,11 +286,11 @@
 									"query": [
 										{
 											"key": "firstName",
-											"value": ""
+											"value": "R"
 										},
 										{
 											"key": "lastName",
-											"value": "santarelli"
+											"value": ""
 										}
 									]
 								}
