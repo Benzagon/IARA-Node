@@ -62,7 +62,7 @@ export const signUp = async (req, res) => {
 
         const mailOptions = {
             from: 'Verificación <luisembonstrizzi@gmail.com>',
-            to: email,
+            to: HospitalEmail,
             subject: 'Verificación',
             template: 'email'
         }

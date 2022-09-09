@@ -14,6 +14,7 @@ const PORT = process.env.PORT;
 app.set("port", PORT);
 
 //Middlewares
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());

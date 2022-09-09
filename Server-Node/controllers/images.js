@@ -1,6 +1,5 @@
 import { pool } from '../db.js'
-import fetch from 'node-fetch';
-
+import fetch, { fileFromSync } from 'node-fetch';
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
 
@@ -8,14 +7,28 @@ export const uploadImage = async (req, res) => {
 
         //Recibir info del front
         const {title, description} = req.body;
-        const id = req.query
+        //const id = req.query
         const filename = req.file.filename;
         const path = req.file.path;
+        const mimetype = req.file.mimetype
 
-        const resultado = await fetch('http:localhost:5000/predict', {
+        console.log(path, mimetype)
+
+        const response1 = await fetch('http://127.0.0.1:8000')
+        const data1 = await response1.json();
+        console.log(data1);
+        const file = fileFromSync(path, mimetype)
+        console.log(file)
+        const response = await fetch('http://127.0.0.1:8000/predict',{
             method: 'post',
-            body: path
+            body: {"file":file},
+            headers: {"Content-Type": "application/json"}
         })
+
+
+        const data = await response.json();
+
+        console.log(data)
         //Mandar la info a la db
         const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img) VALUES (?, ?, ?, ?)", [filename, title, description, path])
 
