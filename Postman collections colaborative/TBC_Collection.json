@@ -435,9 +435,9 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "imagefile",
+									"key": "file",
 									"type": "file",
-									"src": "/D:/Imagenes/imagenCovid3.png"
+									"src": "/C:/Users/47205114/Documents/GitHub/ML-api/images/Normal-3500.png"
 								}
 							]
 						},
