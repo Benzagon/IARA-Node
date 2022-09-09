@@ -315,7 +315,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\" : \"Ariel\", \r\n    \"lastName\": \"Alzogaray\", \r\n    \"email\": \"ArielAlzogaray@gmail.com\", \r\n    \"password\": \"Alzo123\",\r\n    \"doctorId\": \"987654\",\r\n    \"HospitalName\": \"AAHospital\",\r\n    \"HospitalEmail\": \"AAHospital@est.edu.ar\"\r\n}",
+									"raw": "{\r\n    \"firstName\" : \"Gonza\", \r\n    \"lastName\": \"Benza\", \r\n    \"email\": \"gonbenzaquen@gmail.com\", \r\n    \"password\": \"MrBenz\",\r\n    \"doctorId\": \"332908\",\r\n    \"HospitalName\": \"BenzaHospital\",\r\n    \"HospitalEmail\": \"BenzaHospital@est.edu.ar\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
