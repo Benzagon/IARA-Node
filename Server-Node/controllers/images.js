@@ -1,5 +1,7 @@
 import { pool } from '../db.js'
-import fetch, { fileFromSync } from 'node-fetch';
+import fetch, { FormData } from 'node-fetch';
+import axios from 'axios';
+import {readFile, createReadStream} from 'fs'
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
 
@@ -15,17 +17,23 @@ export const uploadImage = async (req, res) => {
         console.log(path, mimetype)
 
         const response1 = await fetch('http://127.0.0.1:8000')
+
         const data1 = await response1.json();
         console.log(data1);
-        const file = fileFromSync(path, mimetype)
-        console.log(file)
+        console.log(req.file)
+
+        const form = new FormData();
+        const file = createReadStream(path);
+        form.append('file', file);
+        
+        //const file = fileFromSync(path, mimetype)
+        //console.log(file)
         const response = await fetch('http://127.0.0.1:8000/predict',{
             method: 'post',
-            body: {"file":file},
-            headers: {"Content-Type": "application/json"}
+            body: form,
+            headers: {'Content-Type': 'multipart/form-data'},
         })
-
-
+        
         const data = await response.json();
 
         console.log(data)
