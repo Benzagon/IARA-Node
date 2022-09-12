@@ -8,8 +8,7 @@ export const uploadImage = async (req, res) => {
     try {
 
         //Recibir info del front
-        const {title, description} = req.body;
-        //const id = req.query
+        const {title, description, id_paciente} = req.body;
         const filename = req.file.filename;
         const path = req.file.path;
         const mimetype = req.file.mimetype
@@ -20,31 +19,35 @@ export const uploadImage = async (req, res) => {
 
         const data1 = await response1.json();
         console.log(data1);
-        console.log(req.file)
 
-        const form = new FormData();
+         const form = new FormData();
         const file = createReadStream(path);
+        const obj = {
+            file: file
+        }
         form.append('file', file);
         
         //const file = fileFromSync(path, mimetype)
         //console.log(file)
         const response = await fetch('http://127.0.0.1:8000/predict',{
-            method: 'post',
-            body: form,
+            method: 'POST',
+            files: form,
+            body: JSON.stringify(obj),
             headers: {'Content-Type': 'multipart/form-data'},
         })
         
-        const data = await response.json();
+        const prediction = await response.json();
 
-        console.log(data)
+        console.log(prediction)
+        
         //Mandar la info a la db
-        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img) VALUES (?, ?, ?, ?)", [filename, title, description, path])
+        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img, id_paciente) VALUES (?, ?, ?, ?, ?)", [filename, title, description, path, id_paciente])
 
         console.log(result)
 
         //const date = new Date().toString();
 
-        res.json({id: result.insertId, title, description, filename, path})
+        res.json({title, description, path, prediction})
 
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -55,7 +58,8 @@ export const uploadImage = async (req, res) => {
 export const getImages = async (req, res) => {
 
     try {
-        const [result] = await pool.query("SELECT * FROM radiografias ORDER BY createdAt ASC")
+        const id_paciente = req.body
+        const [result] = await pool.query("SELECT * FROM radiografias WHERE id_paciente = ?", [id_paciente])
 
         console.log(result)
 
@@ -68,7 +72,8 @@ export const getImages = async (req, res) => {
 export const getImage = async (req, res) => {
 
     try {
-        const [result] = await pool.query("SELECT * FROM radiografias WHERE id = ?", [req.params.id])
+        const id_paciente = req.body
+        const [result] = await pool.query("SELECT * FROM radiografias WHERE id = ? AND id_paciente = ?", [req.params.id, id_paciente])
 
         console.log(result.length)
 
@@ -87,9 +92,9 @@ export const updateImage = async (req, res) => {
     try {
         const {id} = req.params
 
-        const {title, description} = req.body;
+        const {title, description, id_paciente} = req.body;
 
-        const [existingUser] = await pool.query("SELECT * FROM radiografias WHERE id = ?", [req.params.id])
+        const [existingUser] = await pool.query("SELECT * FROM radiografias WHERE id = ? AND id_paciente = ?", [req.params.id, id_paciente])
 
         if(existingUser.length === 0){
             return res.status(404).json({message: "El usuario no fue encontrado"});
@@ -109,7 +114,8 @@ export const updateImage = async (req, res) => {
 export const deleteImage = async (req, res) => {
 
     try {
-        const[result] = await pool.query("DELETE FROM radiografias WHERE id = ?", [req.params.id])
+        const id_paciente = req.body
+        const[result] = await pool.query("DELETE FROM radiografias WHERE id_paciente = ? AND id = ?", [id_paciente, req.params.id])
 
         if(result.affectedRows === 0){
             return res.status(404).json({message: "La imagen no fue encontrada"})
