@@ -2,6 +2,8 @@ import { pool } from '../db.js'
 import fetch, { FormData } from 'node-fetch';
 import axios from 'axios';
 import {readFile, createReadStream} from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url';
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
 
@@ -20,20 +22,11 @@ export const uploadImage = async (req, res) => {
         const data1 = await response1.json();
         console.log(data1);
 
-         const form = new FormData();
-        const file = createReadStream(path);
-        const obj = {
-            file: file
-        }
-        form.append('file', file);
         
-        //const file = fileFromSync(path, mimetype)
-        //console.log(file)
         const response = await fetch('http://127.0.0.1:8000/predict',{
-            method: 'POST',
-            files: form,
-            body: JSON.stringify(obj),
-            headers: {'Content-Type': 'multipart/form-data'},
+            method: 'post',
+            body: JSON.stringify({path}),
+            headers: {'Content-Type': 'application/json'}
         })
         
         const prediction = await response.json();
@@ -137,4 +130,26 @@ export const getFrontalImages = (req, res) => {
 
 export const getProfileImages = (req, res) => {
     res.json("Obteniendo imagenes de perfil")
+}
+
+export const sendFile = (req, res) => {
+    try {
+        const imagePath = req.body.path
+        console.log(imagePath)
+
+        const __filename = fileURLToPath(import.meta.url);
+        
+        const moduleURL = new URL(import.meta.url);
+        const __dirname = path.dirname(imagePath);
+        const __dirname2 = path.dirname(new URL(import.meta.url).pathname);
+        console.log(moduleURL)
+        console.log('filename:', __filename);
+        console.log('dirname:', __dirname, '../images');
+        console.log('dirname2:', __dirname2);
+        console.log('Nueva dir: ', path.join(__dirname, '/dist', 'index.html'))
+
+        res.status(200).sendFile(__dirname + '/' + imagePath)
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
 }
