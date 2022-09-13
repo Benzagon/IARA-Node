@@ -138,7 +138,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Enviar imagen",
 							"id": "fd010a11-936e-4ec6-9ae0-7238a4e17dc3",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
