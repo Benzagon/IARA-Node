@@ -142,13 +142,15 @@ export const sendFile = (req, res) => {
         const moduleURL = new URL(import.meta.url);
         const __dirname = path.dirname(imagePath);
         const __dirname2 = path.dirname(new URL(import.meta.url).pathname);
+        console.log(process.cwd())
         console.log(moduleURL)
         console.log('filename:', __filename);
         console.log('dirname:', __dirname, '../images');
         console.log('dirname2:', __dirname2);
         console.log('Nueva dir: ', path.join(__dirname, '/dist', 'index.html'))
+        console.log(process.cwd() + `/${imagePath}`)
 
-        res.status(200).sendFile(__dirname + '/' + imagePath)
+        res.status(200).sendFile(process.cwd() + `/${imagePath}`)
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
