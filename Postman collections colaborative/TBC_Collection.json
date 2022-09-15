@@ -33,19 +33,22 @@
 										{
 											"key": "title",
 											"value": "hola",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										},
 										{
 											"key": "description",
 											"value": "chau",
-											"type": "text",
-											"disabled": true
+											"type": "text"
 										},
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/D:/Imagenes/imagenCovid2.jpg"
+											"src": "/C:/Users/47205114/Documents/GitHub/ML-api/images/Normal-3500.png"
+										},
+										{
+											"key": "id_paciente",
+											"value": "1",
+											"type": "text"
 										}
 									]
 								},
