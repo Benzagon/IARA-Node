@@ -34,7 +34,7 @@ export const signUp = async (req, res) => {
 
         const [DoctorData] = await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
 
-        const accessToken = await oAuth2Client.getAccessToken()
+        /*const accessToken = await oAuth2Client.getAccessToken()
 
         const transport = nodemailer.createTransport({
             service: 'gmail',
@@ -68,6 +68,7 @@ export const signUp = async (req, res) => {
         }
 
         await transport.sendMail(mailOptions)
+        */
 
         return res.json({ message: "El usuario se ha registrado con éxito" })
 

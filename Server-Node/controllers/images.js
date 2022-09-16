@@ -11,6 +11,7 @@ export const uploadImage = async (req, res) => {
 
         //Recibir info del front
         const {title, description, id_paciente} = req.body;
+        console.log(req.body)
         const filename = req.file.filename;
         const path = req.file.path;
         const mimetype = req.file.mimetype
@@ -29,12 +30,13 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
         })
         
-        const prediction = await response.json();
+        const {prediction} = await response.json();
 
         console.log(prediction)
-        
+        console.log(prediction)
+
         //Mandar la info a la db
-        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img, id_paciente) VALUES (?, ?, ?, ?, ?)", [filename, title, description, path, id_paciente])
+        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img, probabilidad, id_paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, title, description, path, prediction, id_paciente])
 
         console.log(result)
 
@@ -135,6 +137,7 @@ export const getProfileImages = (req, res) => {
 export const sendFile = (req, res) => {
     try {
         const imagePath = req.body.path
+        /*
         console.log(imagePath)
 
         const __filename = fileURLToPath(import.meta.url);
@@ -148,9 +151,10 @@ export const sendFile = (req, res) => {
         console.log('dirname:', __dirname, '../images');
         console.log('dirname2:', __dirname2);
         console.log('Nueva dir: ', path.join(__dirname, '/dist', 'index.html'))
-        console.log(process.cwd() + `/${imagePath}`)
+        */
+        console.log(process.cwd() + '/' + imagePath)
 
-        res.status(200).sendFile(process.cwd() + `/${imagePath}`)
+        res.status(200).sendFile(process.cwd() + '/' + imagePath)
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
