@@ -398,24 +398,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "http://localhost:4000/user/refreshToken?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2MjA5MiwiZXhwIjoxNjYxMzYyMjEyfQ.prDLJKdNuOrUh0gIb-o2XQZpLHGh0wgJ_lgOE_oh1kA",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"user",
-										"refreshToken"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2MjA5MiwiZXhwIjoxNjYxMzYyMjEyfQ.prDLJKdNuOrUh0gIb-o2XQZpLHGh0wgJ_lgOE_oh1kA"
-										}
-									]
-								}
+								"url": "http://localhost:4000/user/refreshToken"
 							},
 							"response": []
 						},
