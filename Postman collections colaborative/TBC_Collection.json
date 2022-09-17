@@ -371,7 +371,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"LuisardoPollo@gmail.com\", \r\n    \"password\": \"Luis2\"\r\n}",
+									"raw": "{\r\n    \"email\": \"ArielAlzogaray@gmail.com\", \r\n    \"password\": \"Alzo123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
