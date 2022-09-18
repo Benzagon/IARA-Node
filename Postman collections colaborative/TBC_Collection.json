@@ -382,7 +382,7 @@
 									}
 								},
 								"url": "http://localhost:4000/user/signin",
-								"description": "Esta ruta esta destinada a simular el inicio de sesión de médicos. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signin](http://localhost:4000/user/signin)  \n\\* Request: Email y contraseña  \n\\* Response: Dos cookies que contienen el access token y el refresh token respectivamente\n\nres.setHeader('Set-Cookie', \\[serializeAccessToken, serializeRefreshToken\\]).json({ message: \"El usuario se ha logueado con éxito\" })  \n\nEndFragment"
+								"description": "Esta ruta esta destinada a simular el inicio de sesión de médicos. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signin](http://localhost:4000/user/signin)  \n\\* Request: Email y contraseña  \n\\* Response: Dos cookies que contienen el access token y el refresh token respectivamente. Esto sumado a un mensaje expresando que se ha logueado con éxito\n\nEjemplo:\n\nres.setHeader('Set-Cookie', \\[serializeAccessToken, serializeRefreshToken\\]).json({ message: \"El usuario se ha logueado con éxito\" })"
 							},
 							"response": []
 						},
