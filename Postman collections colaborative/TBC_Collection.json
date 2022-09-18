@@ -396,7 +396,7 @@
 								"method": "POST",
 								"header": [],
 								"url": "http://localhost:4000/user/refreshToken",
-								"description": "Esta ruta está destinada a simular el pedido de un nuevo access token. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signin](http://localhost:4000/user/signin)  \n\\* Request: Cookie que contiene el refresh token  \n\\* Response: Una nueva cookie que contiene un nuevo access token. Esto sumado a un mensaje de que la nueva cookie junto al access token han sido creados correctamente\n\nEjemplo:\n\nStartFragment\n\nres.setHeader('Set-Cookie', serializeAccessToken).json({ message: \"El nuevo access token ha sido creado correctamente\" })\n\nEndFragment"
+								"description": "Esta ruta está destinada a simular el pedido de un nuevo access token. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signin](http://localhost:4000/user/signin)  \n\\* Request: Cookie que contiene el refresh token  \n\\* Response: Una nueva cookie que contiene un nuevo access token. Esto sumado a un mensaje de que la nueva cookie junto al access token han sido creados correctamente\n\nEjemplo:\n\nres.setHeader('Set-Cookie', serializeAccessToken).json({ message: \"El nuevo access token ha sido creado correctamente\" })"
 							},
 							"response": []
 						},
