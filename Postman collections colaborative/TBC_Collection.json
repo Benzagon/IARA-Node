@@ -382,7 +382,7 @@
 									}
 								},
 								"url": "http://localhost:4000/user/signin",
-								"description": "...."
+								"description": "Esta ruta esta destinada a simular el inicio de sesión de médicos. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: http://localhost:4000/user/signin  \n\\* Request: Email y contraseña  \n\\* Response:"
 							},
 							"response": []
 						},
