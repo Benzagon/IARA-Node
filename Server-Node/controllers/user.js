@@ -10,31 +10,31 @@ import path from 'path'
 const CLIENT_ID = '606708961766-ttag6051su85n61c05rfcq6nv0kp9p0e.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const REFRESH_TOKEN = '1//04iNrKr181_fHCgYIARAAGAQSNwF-L9Irs5YrqgLaSBzxIXYmeUxQdcN3daD7pXxm7ljENd3uTA8DTqElHINaTREB2NcjOyyyf24'
+const REFRESH_TOKEN = '1//04cj07yNc2vDWCgYIARAAGAQSNwF-L9IrbcQjK5s8G0GCRiGVBSw90Q4_fwmhJIz3Dhw3zjWOBgutxYSCfVFxJU5b_zqgwFtRpOE'
+
 
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
 
+
 export const signUp = async (req, res) => {
 
     try {
 
-        const { firstName, lastName, email, password, doctorId, HospitalName, HospitalEmail } = req.body
+        const { firstName, lastName, email, password, doctorId, HospitalEmail } = req.body
 
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
 
         if (existingUser.length !== 0) return res.status(404).json({ message: "El usuario ya existe" });
 
-        const [HospitalData] = await pool.query("INSERT INTO hospitales (nombre, email) VALUES (?, ?)", [HospitalName, HospitalEmail])
+        const [HospitalData] = await pool.query("INSERT INTO hospitales (email) VALUES (?)", [HospitalEmail])
 
         const id_hospitales = HospitalData.insertId
 
         const hashedPassword = await bcrypt.hash(password, 12)
 
-        const [DoctorData] = await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
-
-        /*const accessToken = await oAuth2Client.getAccessToken()
+        const accessToken = await oAuth2Client.getAccessToken()
 
         const transport = nodemailer.createTransport({
             service: 'gmail',
@@ -68,11 +68,13 @@ export const signUp = async (req, res) => {
         }
 
         await transport.sendMail(mailOptions)
-        */
 
-        return res.json({ message: "El usuario se ha registrado con éxito" })
+        await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
+        
+        return res.json({ message: "Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad" })
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: error.message })
     }
 
@@ -85,13 +87,9 @@ export const signIn = async (req, res) => {
 
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
 
-        console.log(existingUser[0])
-
         if (existingUser.length === 0) return res.status(404).json({ message: "El usuario no existe" })
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser[0].contrasenia)
-
-        console.log(isPasswordCorrect);
 
         if (!isPasswordCorrect) return res.status(400).json({ message: "La contraseña es inválida" })
 
@@ -99,10 +97,13 @@ export const signIn = async (req, res) => {
 
         const refreshToken = jwt.sign({ id: existingUser[0].id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1h" })
 
+        console.log(token)
+
+        console.log(refreshToken)
 
         const serializeAccessToken = serialize('AccessToken', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60,
+            expiresIn: 0,
             path: '/'
         })
 
@@ -110,13 +111,11 @@ export const signIn = async (req, res) => {
 
         const serializeRefreshToken = serialize('RefreshToken', refreshToken, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60,
+            expiresIn: 0,
             path: '/'
         })
 
-        res.setHeader('Set-Cookie', [serializeAccessToken, serializeRefreshToken])
-
-        return res.json({ message: "El usuario se ha logueado con éxito" })
+        return res.setHeader('Set-Cookie', [serializeAccessToken, serializeRefreshToken]).json({ message: "El usuario se ha logueado con éxito" })
 
 
     } catch (error) {
@@ -130,31 +129,23 @@ export const refreshToken = async (req, res) => {
 
         const refreshToken = req.cookies.RefreshToken;
 
-        console.log(req.cookies.RefreshToken)
-
         if (!refreshToken) return res.status(401).json("No estas autenticado")
 
         const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
-        console.log(decoded)
-
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE id = ?", [decoded.id])
 
-        console.log(existingUser)
-
-        if (existingUser.length === 0) return res.status(404).json("El token no es válido")
-
-        console.log(existingUser)
+        if (existingUser.length === 0) return res.status(403).json("El token no es válido")
 
         const token = jwt.sign({ id: existingUser[0].id }, process.env.SECRET, { expiresIn: "2m" })
 
         const serializeAccessToken = serialize('AccessToken', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60,
+            expiresIn: 0,
             path: '/'
         })
 
-        return res.setHeader('Set-Cookie', serializeAccessToken)
+        return res.setHeader('Set-Cookie', serializeAccessToken).json({ message: "El nuevo access token ha sido creado correctamente" })
 
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -164,20 +155,17 @@ export const refreshToken = async (req, res) => {
 export const logout = async (req, res) => {
 
     const serializedAccessToken = serialize('AccessToken', null, {
-        httpOnly: true,
         maxAge: 0,
         path: '/'
     })
 
 
     const serializedRefreshToken = serialize('RefreshToken', null, {
-        httpOnly: true,
         maxAge: 0,
         path: '/'
     })
 
-    res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken])
-    return res.status(200).json("Se ha deslogueado correctamente")
+    return res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
 }
 
 export const forgotPassword = async (req, res) => {

@@ -10,11 +10,9 @@ export const uploadPatient = async (req, res) => {
         
         if(existingPatient.length !== 0) return res.status(404).json({message: "El paciente ya existe"})
 
-        const [result] = await pool.query("INSERT INTO paciente (DNI, nombre, apellido, id_medico) VALUES (?,?,?,?)", [DNI, firstName, lastName,id_medico])
+        const [result] = await pool.query("INSERT INTO paciente (DNI, nombre, apellido, id_medico) VALUES (?,?,?,?)", [DNI, firstName, lastName, id_medico])
 
-        //const date = new Date().toString();
-
-        res.json({id: result.insertId, DNI, firstName, lastName })
+        return res.json({id: result.insertId, DNI, firstName, lastName })
     } catch (error) {
         return res.status(500).json({ message: error.message})
     }
@@ -27,7 +25,7 @@ export const getPatients = async (req, res) => {
 
         const [result] = await pool.query("SELECT * FROM paciente WHERE id_medico = ?", [id_medico])
 
-        res.json(result)
+        return res.json(result)
     } catch (error) {
         return res.status(500).json({ message: error.message})
     }
@@ -48,7 +46,7 @@ export const getPatient = async (req, res) => {
             return res.status(404).json({message: "El paciente no fue encontrado"});
         }
 
-        res.json(result[0])
+        return res.json(result[0])
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
@@ -63,13 +61,13 @@ export const updatePatient = async (req, res) => {
 
         const id_medico = req.user
 
-        const [existingPatient] = await pool.query("SELECT * FROM paciente WHERE id_medico = ?", [id_medico])
+        const [existingPatient] = await pool.query("SELECT * FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id])
 
         console.log(existingPatient)
 
         if(existingPatient.length === 0) return res.status(404).json({message: "El usuario no fue encontrado"});
 
-        const [result] = await pool.query("UPDATE paciente SET DNI = ?, nombre = ?, apellido = ? WHERE id_medico = ? AND id = ?", [DNI, firstName, lastName, id_medico, id])
+        await pool.query("UPDATE paciente SET DNI = ?, nombre = ?, apellido = ? WHERE id_medico = ? AND id = ?", [DNI, firstName, lastName, id_medico, id])
 
         return res.json({message: "El paciente ha sido actualizado con éxito"})
     } catch (error) {
@@ -97,13 +95,17 @@ export const deletePatient = async (req, res) => {
 
 export const getPatientBySearch = async (req, res) => {
 
-    const { firstName, lastName } = req.query;
+    try {
+        const { DNI } = req.query;
 
+        const id_medico = req.user
+        console.log(id_medico)
 
-    const [result] = await pool.query("SELECT nombre, apellido FROM paciente WHERE nombre LIKE CONCAT ('%', ?, '%') OR apellido LIKE CONCAT ('%', ?, '%')", [firstName, lastName])
+        const [result] = await pool.query("SELECT * FROM paciente WHERE id_medico = ? AND DNI LIKE CONCAT ('%', ?, '%')", [id_medico, DNI])
 
-    //const [resultado] = await pool.query("SELECT nombre, apellido FROM paciente WHERE nombre REGEXP CONCAT(^,?) OR apellido REGEXP CONCAT(^,?)", [firstName, lastName])
-
-    res.json({ data: result})
+        return res.json(result)
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
 }
     

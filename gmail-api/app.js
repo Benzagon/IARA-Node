@@ -6,7 +6,7 @@ import path from 'path'
 const CLIENT_ID = '606708961766-ttag6051su85n61c05rfcq6nv0kp9p0e.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const REFRESH_TOKEN = '1//04iNrKr181_fHCgYIARAAGAQSNwF-L9Irs5YrqgLaSBzxIXYmeUxQdcN3daD7pXxm7ljENd3uTA8DTqElHINaTREB2NcjOyyyf24'
+const REFRESH_TOKEN = '1//04cj07yNc2vDWCgYIARAAGAQSNwF-L9IrbcQjK5s8G0GCRiGVBSw90Q4_fwmhJIz3Dhw3zjWOBgutxYSCfVFxJU5b_zqgwFtRpOE'
 
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)

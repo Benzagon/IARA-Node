@@ -16,8 +16,8 @@ app.set("port", PORT);
 //Middlewares
 
 app.use(express.json());
-app.use(morgan("dev"));
 app.use(cookieParser());
+app.use(morgan("dev"));
 
 //Routes
 

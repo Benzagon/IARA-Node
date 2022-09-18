@@ -1,9 +1,5 @@
 import { pool } from '../db.js'
-import fetch, { FormData } from 'node-fetch';
-import axios from 'axios';
-import {readFile, createReadStream} from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url';
+import fetch from 'node-fetch';
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
 
@@ -11,18 +7,8 @@ export const uploadImage = async (req, res) => {
 
         //Recibir info del front
         const {title, description, id_paciente} = req.body;
-        console.log(req.body)
         const filename = req.file.filename;
         const path = req.file.path;
-        const mimetype = req.file.mimetype
-
-        console.log(path, mimetype)
-
-        const response1 = await fetch('http://127.0.0.1:8000')
-
-        const data1 = await response1.json();
-        console.log(data1);
-
         
         const response = await fetch('http://127.0.0.1:8000/predict',{
             method: 'post',
@@ -33,16 +19,10 @@ export const uploadImage = async (req, res) => {
         const {prediction} = await response.json();
 
         console.log(prediction)
-        console.log(prediction)
-
         //Mandar la info a la db
-        const [result] = await pool.query("INSERT INTO radiografias (nombre_img, titulo_img, descripcion_img, ruta_img, probabilidad, id_paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, title, description, path, prediction, id_paciente])
+        await pool.query("INSERT INTO radiografias (nombre, titulo, descripcion, ruta, prediccion_cnn, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, title, description, path, prediction, id_paciente])
 
-        console.log(result)
-
-        //const date = new Date().toString();
-
-        res.json({title, description, path, prediction})
+        res.status(200).json({title, description, path, prediction})
 
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -56,8 +36,6 @@ export const getImages = async (req, res) => {
         const id_paciente = req.body
         const [result] = await pool.query("SELECT * FROM radiografias WHERE id_paciente = ?", [id_paciente])
 
-        console.log(result)
-
         res.json(result);
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -69,8 +47,6 @@ export const getImage = async (req, res) => {
     try {
         const id_paciente = req.body
         const [result] = await pool.query("SELECT * FROM radiografias WHERE id = ? AND id_paciente = ?", [req.params.id, id_paciente])
-
-        console.log(result.length)
 
         if(result.length === 0){
             return res.status(404).json({message: "La imagen no fue encontrada"});
@@ -95,7 +71,7 @@ export const updateImage = async (req, res) => {
             return res.status(404).json({message: "El usuario no fue encontrado"});
         }
 
-        const [result] = await pool.query("UPDATE radiografias SET titulo_img = ?, descripcion_img = ? WHERE id = ?", [title, description, id])
+        await pool.query("UPDATE radiografias SET titulo_img = ?, descripcion_img = ? WHERE id = ?", [title, description, id])
     
         return res.json({message: "El paciente ha sido actualizado con éxito"})
     } catch (error) {
@@ -137,24 +113,9 @@ export const getProfileImages = (req, res) => {
 export const sendFile = (req, res) => {
     try {
         const imagePath = req.body.path
-        /*
         console.log(imagePath)
 
-        const __filename = fileURLToPath(import.meta.url);
-        
-        const moduleURL = new URL(import.meta.url);
-        const __dirname = path.dirname(imagePath);
-        const __dirname2 = path.dirname(new URL(import.meta.url).pathname);
-        console.log(process.cwd())
-        console.log(moduleURL)
-        console.log('filename:', __filename);
-        console.log('dirname:', __dirname, '../images');
-        console.log('dirname2:', __dirname2);
-        console.log('Nueva dir: ', path.join(__dirname, '/dist', 'index.html'))
-        */
-        console.log(process.cwd() + '/' + imagePath)
-
-        res.status(200).sendFile(process.cwd() + '/' + imagePath)
+        res.status(200).sendFile(imagePath)
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
