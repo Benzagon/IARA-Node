@@ -267,14 +267,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"DNI\": \"21345678\",\r\n    \"firstName\": \"Manuel\",\r\n    \"lastName\": \"Grip\"\r\n}",
+									"raw": "{\r\n    \"DNI\": \"21345678\",\r\n    \"firstName\": \"Manu\",\r\n    \"lastName\": \"Gru\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:4000/patient/31"
+								"url": "http://localhost:4000/patient/40"
 							},
 							"response": []
 						},
