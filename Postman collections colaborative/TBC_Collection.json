@@ -394,13 +394,7 @@
 							},
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2MTM2Mjc4MywiZXhwIjoxNjYxMzYzMDgzfQ.0SNDbD6Q1UbXKzkTYauhfGj_vpg215EU013OgoqDL48",
-										"type": "text"
-									}
-								],
+								"header": [],
 								"url": "http://localhost:4000/user/refreshToken"
 							},
 							"response": []
