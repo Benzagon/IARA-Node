@@ -215,7 +215,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": {}
+									"bearer": {
+										"token": ""
+									}
 								},
 								"method": "GET",
 								"header": [
