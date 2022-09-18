@@ -359,7 +359,7 @@
 									}
 								},
 								"url": "http://localhost:4000/user/signup",
-								"description": "Esta ruta esta destinada a simular el registro de medicos. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signup](http://localhost:4000/user/signup)  \n\\* Request: Nombre, apellido, email personal, contraseña, matrícula y hospital el cual trabaja  \n\\* Response: res.json({ message: \"Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad\" })\n\nEndFragment"
+								"description": "Esta ruta esta destinada a simular el registro de medicos. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/signup](http://localhost:4000/user/signup)  \n\\* Request: Nombre, apellido, email personal, contraseña, matrícula y hospital el cual trabaja  \n\\* Response: res.json({ message: \"Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad\" })"
 							},
 							"response": []
 						},
