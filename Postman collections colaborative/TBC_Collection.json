@@ -88,7 +88,16 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:4000/images/1"
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_paciente\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/images/38"
 							},
 							"response": []
 						},
