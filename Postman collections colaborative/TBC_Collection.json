@@ -261,7 +261,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"DNI\": \"21345678\",\r\n    \"firstName\": \"Manu\",\r\n    \"lastName\": \"Gru\"\r\n}",
+									"raw": "{\r\n    \"DNI\": \"21345678\",\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
