@@ -307,7 +307,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:4000/patient/search?DNI=",
+									"raw": "http://localhost:4000/patient/search?DNI=4",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -320,7 +320,7 @@
 									"query": [
 										{
 											"key": "DNI",
-											"value": ""
+											"value": "4"
 										}
 									]
 								}
