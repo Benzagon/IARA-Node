@@ -31,28 +31,13 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "title",
-											"value": "hola",
-											"type": "text"
-										},
-										{
-											"key": "description",
-											"value": "chau",
-											"type": "text"
-										},
-										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/47205114/Documents/GitHub/ML-api/images/Tuberculosis-700.png"
-										},
-										{
-											"key": "id_paciente",
-											"value": "37",
-											"type": "text"
+											"src": "/C:/Users/47205114/Documents/GitHub/ML-api/images/Tuberculosis-699.png"
 										}
 									]
 								},
-								"url": "http://localhost:4000/images/upload",
+								"url": "http://localhost:4000/images/upload/39",
 								"description": "Esta ruta esta destinada a simular la subida de imágenes. Contiene las siguientes características:\n\n\\*   Método utilizado: POST\n\\*   URL: [http://localhost:4000/images/upload](http://localhost:4000/images/upload)\n\\*   Request:\n\\*   Headers:\n\\*   Body:\n\\*   Response:sasa"
 							},
 							"response": []
