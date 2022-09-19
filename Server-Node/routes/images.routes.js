@@ -6,10 +6,6 @@ import {
   getImages,
   getImage,
   deleteImage,
-  updateImage,
-  getImageBySearch,
-  getFrontalImages,
-  getProfileImages,
   sendFile,
 } from "../controllers/images.js";
 import { upload } from "../middlewares/multer.js";
@@ -17,25 +13,16 @@ import { upload } from "../middlewares/multer.js";
 //Definiendo rutas de la aplicación
 
 //Ruta que te permite subir una imagen
-router.post("/images/upload", upload, uploadImage);
+router.post("/images/upload/:id_paciente", upload, uploadImage);
 
 //Ruta que te permite obtener todas las imagenes que subiste
-router.get("/images", getImages);
+router.get("/images/:id", getImages);
 
 //Ruta que te permite obtener solo una imagen
-router.get("/images/:id", getImage);
-
-//Ruta que te permite actualizar una imagen
-router.put("/images/:id", updateImage);
+router.get("/images/:id/:id_paciente", getImage);
 
 //Ruta que te permite eliminar una imagen
-router.delete("/images/:id", deleteImage);
-
-router.get("/images/search", getImageBySearch);
-
-router.get("/frontalImages", getFrontalImages);
-
-router.get("/profileImages", getProfileImages);
+router.delete("/images/:id/:id_paciente", deleteImage);
 
 router.post("/images/sendFile", sendFile);
 

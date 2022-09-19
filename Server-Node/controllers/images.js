@@ -6,7 +6,7 @@ export const uploadImage = async (req, res) => {
     try {
 
         //Recibir info del front
-        const {title, description, id_paciente} = req.body;
+        const {id_paciente} = req.params;
         const filename = req.file.filename;
         const path = req.file.path;
         
@@ -16,13 +16,14 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
         })
         
-        const {prediction} = await response.json();
+        const {prediction_cnn, prediction_transformers} = await response.json();
 
-        console.log(prediction)
+        console.log(prediction_cnn)
+        console.log(prediction_transformers)
         //Mandar la info a la db
-        await pool.query("INSERT INTO radiografias (nombre, titulo, descripcion, ruta, prediccion_cnn, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, title, description, path, prediction, id_paciente])
+        await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers id_Paciente) VALUES (?, ?, ?, ?)", [filename, path, prediction, id_paciente])
 
-        res.status(200).json({title, description, path, prediction})
+        res.status(200).json({path, prediction})
 
     } catch (error) {
         return res.status(500).json({message: error.message})
@@ -33,8 +34,10 @@ export const uploadImage = async (req, res) => {
 export const getImages = async (req, res) => {
 
     try {
-        const id_paciente = req.body
-        const [result] = await pool.query("SELECT * FROM radiografias WHERE id_paciente = ?", [id_paciente])
+        console.log(req.params)
+        const id_paciente = req.params.id
+
+        const [result] = await pool.query("SELECT ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio FROM radiografias WHERE id_paciente = ?", [id_paciente])
 
         res.json(result);
     } catch (error) {
@@ -45,8 +48,8 @@ export const getImages = async (req, res) => {
 export const getImage = async (req, res) => {
 
     try {
-        const id_paciente = req.body
-        const [result] = await pool.query("SELECT * FROM radiografias WHERE id = ? AND id_paciente = ?", [req.params.id, id_paciente])
+        const {id, id_paciente} = req.params
+        const [result] = await pool.query("SELECT ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio FROM radiografias WHERE id = ? AND id_paciente = ?", [id, id_paciente])
 
         if(result.length === 0){
             return res.status(404).json({message: "La imagen no fue encontrada"});
@@ -58,35 +61,12 @@ export const getImage = async (req, res) => {
     }
 }
 
-export const updateImage = async (req, res) => {
-
-    try {
-        const {id} = req.params
-
-        const {title, description, id_paciente} = req.body;
-
-        const [existingUser] = await pool.query("SELECT * FROM radiografias WHERE id = ? AND id_paciente = ?", [req.params.id, id_paciente])
-
-        if(existingUser.length === 0){
-            return res.status(404).json({message: "El usuario no fue encontrado"});
-        }
-
-        await pool.query("UPDATE radiografias SET titulo_img = ?, descripcion_img = ? WHERE id = ?", [title, description, id])
-    
-        return res.json({message: "El paciente ha sido actualizado con éxito"})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message: error.message})
-    }
-    
-   
-}
 
 export const deleteImage = async (req, res) => {
 
     try {
-        const id_paciente = req.body
-        const[result] = await pool.query("DELETE FROM radiografias WHERE id_paciente = ? AND id = ?", [id_paciente, req.params.id])
+        const {id, id_paciente} = req.params
+        const[result] = await pool.query("DELETE FROM radiografias WHERE id = ? AND id_paciente = ?", [id, id_paciente])
 
         if(result.affectedRows === 0){
             return res.status(404).json({message: "La imagen no fue encontrada"})
@@ -97,19 +77,6 @@ export const deleteImage = async (req, res) => {
         return res.status(500).json({message: error.message})
     }
 }
-
-export const getImageBySearch = async (req, res) => {
-    res.json("Buscando imagen")
-}
-
-export const getFrontalImages = (req, res) => {
-    res.json("Obteniendo imagenes frontales")
-}
-
-export const getProfileImages = (req, res) => {
-    res.json("Obteniendo imagenes de perfil")
-}
-
 export const sendFile = (req, res) => {
     try {
         const imagePath = req.body.path
