@@ -68,14 +68,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id_paciente\":\"1\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:4000/images"
+								"url": "http://localhost:4000/images/1"
 							},
 							"response": []
 						},
