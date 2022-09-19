@@ -68,7 +68,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id_paciente\":\"1\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
