@@ -90,14 +90,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id_paciente\": \"1\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:4000/images/38"
+								"url": "http://localhost:4000/images/23/39"
 							},
 							"response": []
 						},
