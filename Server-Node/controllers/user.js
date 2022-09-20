@@ -6,17 +6,17 @@ import nodemailer from 'nodemailer'
 import { google } from 'googleapis'
 import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
-
+/*
 const CLIENT_ID = '606708961766-ttag6051su85n61c05rfcq6nv0kp9p0e.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const REFRESH_TOKEN = '1//04cj07yNc2vDWCgYIARAAGAQSNwF-L9IrbcQjK5s8G0GCRiGVBSw90Q4_fwmhJIz3Dhw3zjWOBgutxYSCfVFxJU5b_zqgwFtRpOE'
 
 
-
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
 
+*/
 
 export const signUp = async (req, res) => {
 
@@ -29,13 +29,13 @@ export const signUp = async (req, res) => {
         if (existingUser.length !== 0) return res.status(404).json({ message: "El usuario ya existe" });
 
         const [HospitalData] = await pool.query("INSERT INTO hospitales (email) VALUES (?)", [HospitalEmail])
-
+        
         const id_hospitales = HospitalData.insertId
-
+        
         const hashedPassword = await bcrypt.hash(password, 12)
-
+        /*
         const accessToken = await oAuth2Client.getAccessToken()
-
+        
         const transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -43,7 +43,7 @@ export const signUp = async (req, res) => {
                 user: 'luisembonstrizzi@gmail.com',
                 clientId: CLIENT_ID,
                 clientSecret: CLIENT_SECRET,
-                refreshToken: REFRESH_TOKEN,
+                // refreshToken: REFRESH_TOKEN,
                 accessToken: accessToken
             }
         })
@@ -69,9 +69,40 @@ export const signUp = async (req, res) => {
 
         await transport.sendMail(mailOptions)
 
+        */
+        const transport = nodemailer.createTransport({
+            host: 'smtp-relay.sendinblue.com',
+            port: 587,
+            auth: {
+                user: 'messirw@hotmail.com',
+                pass: 'WLA8byUJ2S6Hx3kf'
+            }
+        })
+
+        const handlebarsOptions = {
+            viewEngine: {
+                extname: ".handlebars",
+                partialsDir: path.resolve('./views'),
+                defaultLayout: false
+            },
+            viewPath: path.resolve('./views'),
+            extName: ".handlebars"
+        }
+
+        transport.use('compile', hbs(handlebarsOptions))
+
+        const mailOptions = {
+            from: 'Verificación <messirw@hotmail.com>',
+            to: HospitalEmail,
+            subject: 'Verificación',
+            template: 'email'
+        }
+
+        await transport.sendMail(mailOptions)
+
         await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
         
-        return res.json({ message: "Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad" })
+        res.json({ message: "Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad" })
 
     } catch (error) {
         console.log(error)

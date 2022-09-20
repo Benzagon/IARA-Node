@@ -12,9 +12,9 @@ export const uploadPatient = async (req, res) => {
 
         const [result] = await pool.query("INSERT INTO paciente (DNI, id_medico) VALUES (?,?)", [DNI, id_medico])
 
-        return res.json({id: result.insertId, DNI})
+        res.json({id: result.insertId, DNI})
     } catch (error) {
-        return res.status(500).json({ message: error.message})
+        res.status(500).json({ message: error.message})
     }
 }
 
@@ -25,9 +25,9 @@ export const getPatients = async (req, res) => {
 
         const [result] = await pool.query("SELECT id, DNI FROM paciente WHERE id_medico = ?", [id_medico])
 
-        return res.json(result)
+        res.json(result)
     } catch (error) {
-        return res.status(500).json({ message: error.message})
+        res.status(500).json({ message: error.message})
     }
     
 }
@@ -46,9 +46,9 @@ export const getPatient = async (req, res) => {
             return res.status(404).json({message: "El paciente no fue encontrado"});
         }
 
-        return res.json(result[0])
+        res.json(result[0])
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -69,9 +69,9 @@ export const updatePatient = async (req, res) => {
 
         await pool.query("UPDATE paciente SET DNI = ? WHERE id_medico = ? AND id = ?", [DNI, id_medico, id])
 
-        return res.json({message: "El paciente ha sido actualizado con éxito"})
+        res.json({message: "El paciente ha sido actualizado con éxito"})
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -87,9 +87,9 @@ export const deletePatient = async (req, res) => {
             return res.status(404).json({message: "El usuario no fue encontrado"})
         }
 
-        return res.sendStatus(204).json({message: "El paciente ha sido removido con éxito"})
+        res.sendStatus(204).json({message: "El paciente ha sido removido con éxito"})
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -103,9 +103,9 @@ export const getPatientBySearch = async (req, res) => {
 
         const [result] = await pool.query("SELECT id, dni FROM paciente WHERE id_medico = ? AND DNI LIKE CONCAT ('%', ?, '%')", [id_medico, DNI])
 
-        return res.json(result)
+        res.json(result)
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
     

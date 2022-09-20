@@ -16,17 +16,18 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
         })
         
-        const {prediction_cnn, prediction_transformers} = await response.json();
+        const {prediction_cnn, prediction_transformers, prediction_average} = await response.json();
 
         console.log(prediction_cnn)
         console.log(prediction_transformers)
+        console.log(prediction_average)
         //Mandar la info a la db
-        await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers id_Paciente) VALUES (?, ?, ?, ?)", [filename, path, prediction, id_paciente])
+        await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, path, prediction_cnn, prediction_transformers, prediction_average, id_paciente])
 
-        res.status(200).json({path, prediction})
+        res.status(200).json({path, prediction_cnn, prediction_transformers, prediction_average})
 
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
     
 }
@@ -41,7 +42,7 @@ export const getImages = async (req, res) => {
 
         res.json(result);
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -57,7 +58,7 @@ export const getImage = async (req, res) => {
 
         res.json(result[0])
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -72,9 +73,9 @@ export const deleteImage = async (req, res) => {
             return res.status(404).json({message: "La imagen no fue encontrada"})
         }
 
-        return res.sendStatus(204).json({message: "La imagen ha sido eliminada correctamente"})
+        res.sendStatus(204).json({message: "La imagen ha sido eliminada correctamente"})
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 export const sendFile = (req, res) => {
@@ -84,6 +85,6 @@ export const sendFile = (req, res) => {
 
         res.status(200).sendFile(imagePath)
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
