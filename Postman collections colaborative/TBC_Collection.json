@@ -345,7 +345,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\" : \"Leo\", \r\n    \"lastName\": \"E\", \r\n    \"email\": \"LuisPsaolsaalo@gmail.com\", \r\n    \"password\": \"Luissaasas\",\r\n    \"doctorId\": \"445905\",\r\n    \"HospitalEmail\": \"47205114@est.ort.edu.ar\"\r\n}",
+									"raw": "{\r\n    \"firstName\" : \"Leo\", \r\n    \"lastName\": \"E\", \r\n    \"email\": \"NicoWais@gmail.com\", \r\n    \"password\": \"Luissaasasaasasas\",\r\n    \"doctorId\": \"445905\",\r\n    \"HospitalEmail\": \"47205114@est.ort.edu.ar\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
