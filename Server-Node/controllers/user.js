@@ -74,8 +74,8 @@ export const signUp = async (req, res) => {
             host: 'smtp-relay.sendinblue.com',
             port: 587,
             auth: {
-                user: 'messirw@hotmail.com',
-                pass: 'WLA8byUJ2S6Hx3kf'
+                user: 'luisembonstrizzi@gmail.com',
+                pass: 'AHETbVDxSMfUs30I'
             }
         })
 
@@ -92,7 +92,7 @@ export const signUp = async (req, res) => {
         transport.use('compile', hbs(handlebarsOptions))
 
         const mailOptions = {
-            from: 'Verificación <messirw@hotmail.com>',
+            from: 'Verificación <luisembonstrizzi@gmail.com>',
             to: HospitalEmail,
             subject: 'Verificación',
             template: 'email'
