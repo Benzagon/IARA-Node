@@ -422,7 +422,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Actualizar contraseña",
 							"id": "a150dae7-a913-4a62-997e-d76fec89941e",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
