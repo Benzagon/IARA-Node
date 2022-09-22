@@ -74,8 +74,8 @@ export const signUp = async (req, res) => {
             host: 'smtp-relay.sendinblue.com',
             port: 587,
             auth: {
-                user: 'luisembonstrizzi@gmail.com',
-                pass: 'AHETbVDxSMfUs30I'
+                user: process.env.EMAIL,
+                pass: process.env.SMTP_PASSWORD
             }
         })
 
@@ -106,7 +106,7 @@ export const signUp = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 
 }
@@ -150,7 +150,7 @@ export const signIn = async (req, res) => {
 
 
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -176,10 +176,10 @@ export const refreshToken = async (req, res) => {
             path: '/'
         })
 
-        return res.setHeader('Set-Cookie', serializeAccessToken).json({ message: "El nuevo access token ha sido creado correctamente" })
+        res.setHeader('Set-Cookie', serializeAccessToken).json({ message: "El nuevo access token ha sido creado correctamente" })
 
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -196,14 +196,61 @@ export const logout = async (req, res) => {
         path: '/'
     })
 
-    return res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
+    res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
 }
 
 export const forgotPassword = async (req, res) => {
-    res.json("Recuperando contraseña")
+
+    const { email } = req.body
+
+    const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
+    
+
+    if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
+
+    const transport = nodemailer.createTransport({
+        host: 'smtp-relay.sendinblue.com',
+        port: 587,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.SMTP_PASSWORD
+        }
+    })
+
+    const handlebarsOptions = {
+        viewEngine: {
+            extname: ".handlebars",
+            partialsDir: path.resolve('./views'),
+            defaultLayout: false
+        },
+        viewPath: path.resolve('./views'),
+        extName: ".handlebars"
+    }
+
+    transport.use('compile', hbs(handlebarsOptions))
+
+    const mailOptions = {
+        from: 'Recuperación de contraseña <luisembonstrizzi@gmail.com>',
+        to: email,
+        subject: 'Recuperación de contraseña',
+        template: 'ForgotPassword'
+    }
+
+    await transport.sendMail(mailOptions)
+
+    res.json({
+        id: existingEmail[0].id,
+        message: "Ya hemos enviado un mail al email ingresado"
+    })
 }
 
 export const updatePassword = async (req, res) => {
-    res.json("Actualizando contraseña")
+    const {password, id} = req.body
+
+    const hashedPassword = await bcrypt.hash(password, 12)
+
+    await pool.query("UPDATE registro SET contrasenia = ? WHERE id = ?", [hashedPassword, id])
+
+    res.json({message: "La contraseña ha sido actualizada con éxito"})
 }
 
