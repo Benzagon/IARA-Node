@@ -420,6 +420,18 @@
 								"url": "http://localhost:4000/user/forgotPassword"
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"id": "a150dae7-a913-4a62-997e-d76fec89941e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					],
 					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236",
