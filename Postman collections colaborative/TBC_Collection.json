@@ -38,7 +38,7 @@
 									]
 								},
 								"url": "http://localhost:4000/images/upload/39",
-								"description": "Esta ruta esta destinada a simular la subida de imágenes. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/images/upload](http://localhost:4000/images/upload)  \n\\* Request: Una imagen jpg o dicom  \n\\* Response: La ruta de la imagen, la predicción del modelo de cnn, la del de transformers y el promedio de ambas\n\nEjermplo:\n\nStartFragment\n\n{    \"path\": \"C:\\\\\\\\Users\\\\\\\\47205114\\\\\\\\Documents\\\\\\\\GitHub\\\\\\\\Back-End\\\\\\\\Server-Node\\\\\\\\images\\\\\\\\15110018-0707-4624-9444-1653a2c5939d.png\",   \n\n\"prediction_cnn\": \"2.99 %\", \n\n\"prediction_transformers\": \"4.21 %\",\n\n\"prediction_average\": \"3.6 %\" }\n\nEndFragment"
+								"description": "Esta ruta esta destinada a simular la subida de imágenes. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/images/upload](http://localhost:4000/images/upload)  \n\\* Request: Una imagen jpg o dicom  \n\\* Response: La ruta de la imagen, la predicción del modelo de cnn, la del de transformers y el promedio de ambas\n\nEjermplo:\n\n{ \"path\": \"C:\\\\\\\\Users\\\\\\\\47205114\\\\\\\\Documents\\\\\\\\GitHub\\\\\\\\Back-End\\\\\\\\Server-Node\\\\\\\\images\\\\\\\\15110018-0707-4624-9444-1653a2c5939d.png\",\n\n\"prediction_cnn\": \"2.99 %\",\n\n\"prediction_transformers\": \"4.21 %\",\n\n\"prediction_average\": \"3.6 %\" }"
 							},
 							"response": []
 						},
