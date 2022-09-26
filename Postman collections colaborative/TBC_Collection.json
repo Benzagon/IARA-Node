@@ -452,7 +452,7 @@
 									}
 								},
 								"url": "http://localhost:4000/user/forgotPassword",
-								"description": "Esta ruta esta destinada a simular el envío de un mail al usuario que no se acuerde su contraseña. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: http://localhost:4000/user/forgotPassword  \n\\* Request: Un email  \n\\* Response: Un mail al email ingresado y mensaje avisando que fue este fue enviado correctamente"
+								"description": "Esta ruta esta destinada a simular el envío de un mail al usuario que no se acuerde su contraseña. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: [http://localhost:4000/user/forgotPassword](http://localhost:4000/user/forgotPassword)  \n\\* Request: Un email  \n\\* Response: Un mail al email ingresado y mensaje avisando que fue este fue enviado correctamente"
 							},
 							"response": []
 						},
