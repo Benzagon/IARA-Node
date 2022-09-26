@@ -474,7 +474,8 @@
 										}
 									}
 								},
-								"url": "http://localhost:4000/user/updatePassword"
+								"url": "http://localhost:4000/user/updatePassword",
+								"description": "Esta ruta esta destinada a simular la creación de una nueva contraseña para aquellos usuarios que se la olvidaron. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: http://localhost:4000/user/updatePassword  \n\\* Request: Una nueva contraseña y el id del usuario  \n\\* Response: Un mensaje que la contraseña ha sido actualizada con éxito"
 							},
 							"response": []
 						}
