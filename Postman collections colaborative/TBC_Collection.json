@@ -83,7 +83,8 @@
 										}
 									}
 								},
-								"url": "http://localhost:4000/images/23/39"
+								"url": "http://localhost:4000/images/23/39",
+								"description": "Esta ruta esta destinada a simular la obtención de una imagen de un paciente. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: http://localhost:4000/images/upload/:id/:id_paciente  \n\\* Request: El id de la imagen y el id del paciente correspondiente  \n\\* Response: La ruta de la imagen, la predicción del modelo de cnn, la del de transformers y el promedio de ambas"
 							},
 							"response": []
 						},
