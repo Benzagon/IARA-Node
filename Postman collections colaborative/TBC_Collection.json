@@ -172,8 +172,19 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Testing-Miniapi/Back-End-Flask/ImageConverter/DCM Data/3.dcm"
+										}
+									]
+								},
+								"url": "http://localhost:4000/images/saveImageRoute"
 							},
 							"response": []
 						}
