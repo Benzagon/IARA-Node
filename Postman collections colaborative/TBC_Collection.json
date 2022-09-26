@@ -60,7 +60,8 @@
 										}
 									}
 								},
-								"url": "http://localhost:4000/images/39"
+								"url": "http://localhost:4000/images/39",
+								"description": "Esta ruta esta destinada a simular la obtención de todas las imágenes de cada paciente. Contiene las siguientes características:\n\n\\* Método utilizado: GET  \n\\* URL: http://localhost:4000/images/:id  \n\\* Request: El id de un paciente  \n\\* Response: La ruta de la imagen, la predicción del modelo de cnn, la del de transformers y el promedio de ambas"
 							},
 							"response": []
 						},
