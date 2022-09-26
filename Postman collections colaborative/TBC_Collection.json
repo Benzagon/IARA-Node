@@ -166,7 +166,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Obtener ruta",
 							"id": "f3d382e9-fb36-47f9-80f7-31456419c662",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
