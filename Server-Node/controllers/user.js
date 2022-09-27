@@ -185,72 +185,84 @@ export const refreshToken = async (req, res) => {
 
 export const logout = async (req, res) => {
 
-    const serializedAccessToken = serialize('AccessToken', null, {
-        maxAge: 0,
-        path: '/'
-    })
-
-
-    const serializedRefreshToken = serialize('RefreshToken', null, {
-        maxAge: 0,
-        path: '/'
-    })
-
-    res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
+    try {
+        const serializedAccessToken = serialize('AccessToken', null, {
+            maxAge: 0,
+            path: '/'
+        })
+    
+    
+        const serializedRefreshToken = serialize('RefreshToken', null, {
+            maxAge: 0,
+            path: '/'
+        })
+    
+        res.setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
 
 export const forgotPassword = async (req, res) => {
 
-    const { email } = req.body
+    try {
+        const { email } = req.body
 
-    const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
-    
+        const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
+        
 
-    if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
+        if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
 
-    const transport = nodemailer.createTransport({
-        host: 'smtp-relay.sendinblue.com',
-        port: 587,
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.SMTP_PASSWORD
+        const transport = nodemailer.createTransport({
+            host: 'smtp-relay.sendinblue.com',
+            port: 587,
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.SMTP_PASSWORD
+            }
+        })
+
+        const handlebarsOptions = {
+            viewEngine: {
+                extname: ".handlebars",
+                partialsDir: path.resolve('./views'),
+                defaultLayout: false
+            },
+            viewPath: path.resolve('./views'),
+            extName: ".handlebars"
         }
-    })
 
-    const handlebarsOptions = {
-        viewEngine: {
-            extname: ".handlebars",
-            partialsDir: path.resolve('./views'),
-            defaultLayout: false
-        },
-        viewPath: path.resolve('./views'),
-        extName: ".handlebars"
+        transport.use('compile', hbs(handlebarsOptions))
+
+        const mailOptions = {
+            from: 'Recuperación de contraseña <luisembonstrizzi@gmail.com>',
+            to: email,
+            subject: 'Recuperación de contraseña',
+            template: 'ForgotPassword'
+        }
+
+        await transport.sendMail(mailOptions)
+
+        res.json({
+            id: existingEmail[0].id,
+            message: "Ya hemos enviado un mail al email ingresado"
+        })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
-
-    transport.use('compile', hbs(handlebarsOptions))
-
-    const mailOptions = {
-        from: 'Recuperación de contraseña <luisembonstrizzi@gmail.com>',
-        to: email,
-        subject: 'Recuperación de contraseña',
-        template: 'ForgotPassword'
-    }
-
-    await transport.sendMail(mailOptions)
-
-    res.json({
-        id: existingEmail[0].id,
-        message: "Ya hemos enviado un mail al email ingresado"
-    })
 }
 
 export const updatePassword = async (req, res) => {
-    const {password, id} = req.body
+    try {
+        const {password, id} = req.body
 
-    const hashedPassword = await bcrypt.hash(password, 12)
+        const hashedPassword = await bcrypt.hash(password, 12)
 
-    await pool.query("UPDATE registro SET contrasenia = ? WHERE id = ?", [hashedPassword, id])
+        await pool.query("UPDATE registro SET contrasenia = ? WHERE id = ?", [hashedPassword, id])
 
-    res.json({message: "La contraseña ha sido actualizada con éxito"})
+        res.json({message: "La contraseña ha sido actualizada con éxito"})
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
 

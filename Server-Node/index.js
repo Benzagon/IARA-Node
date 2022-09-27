@@ -8,10 +8,7 @@ import patientRoutes from "./routes/patient.routes.js";
 
 //Initializations
 const app = express();
-const PORT = process.env.PORT;
-
-//Settings
-app.set("port", PORT);
+const port = process.env.PORT;
 
 //Middlewares
 
@@ -26,5 +23,6 @@ app.use("/user", userRoutes);
 app.use(patientRoutes);
 
 //Server on port...
-app.listen(PORT);
-console.log("Server on port", PORT);
+app.listen(port, () => {
+    console.log(`> Server running on port ${port}`)
+});
