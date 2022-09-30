@@ -353,7 +353,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Obtener recientes",
 							"id": "a191c82e-f1eb-4561-877f-27c4cacb9357",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
