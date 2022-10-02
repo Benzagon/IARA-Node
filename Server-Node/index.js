@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from 'cors'
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import imageRoutes from "./routes/images.routes.js";
@@ -13,6 +14,7 @@ const port = process.env.PORT;
 //Middlewares
 
 app.use(express.json());
+app.use(cors())
 app.use(cookieParser());
 app.use(morgan("dev"));
 

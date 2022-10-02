@@ -9,11 +9,15 @@ import {
   updatePatient,
   deletePatient,
   getPatientBySearch,
+  getPatientUploadedRecently
 } from "../controllers/patient.js";
 import auth from "../middlewares/authJwt.js";
 
-router.get("/patient/search", auth, getPatientBySearch);
 
+router.get("/patient/uploadedRecently", auth, getPatientUploadedRecently);
+
+//Ruta que te permite buscar un paciente a partir de su DNI
+router.get("/patient/search", auth, getPatientBySearch);
 //Ruta que te permite subir un paciente
 router.post("/patient/upload", auth, uploadPatient);
 
@@ -28,5 +32,6 @@ router.put("/patient/:id", auth, updatePatient);
 
 //Ruta que te permite eliminar un paciente
 router.delete("/patient/:id", auth, deletePatient);
+
 
 export default router;

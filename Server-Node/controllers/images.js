@@ -1,6 +1,5 @@
 import { pool } from '../db.js'
 import fetch from 'node-fetch';
-import {upload} from '../middlewares/multer.js'
 import fs from 'fs-extra'
 //Funciones de las rutas. Esto con el objetivo de tener el código lo más organizado posible.
 export const uploadImage = async (req, res) => {
