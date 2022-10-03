@@ -406,7 +406,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"polloskasasalsasasaks@gmail.com\", \r\n    \"password\": \"LuissasaaSjksaASsasaAsasaasasas\"\r\n}",
+									"raw": "{\r\n    \"email\": \"polloskasasalsasasaks@gmail.com\", \r\n    \"password\": \"LuissasaaSjksaASsasaAsasaasasas\",\r\n    \"rol\": \"\",\r\n    \"id_usuario\": 33\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
