@@ -11,11 +11,13 @@ import {
   updatePassword,
 } from "../controllers/user.js";
 
+import { verifyUser } from '../middlewares/verifyUser.js'
+
 //Ruta que te permite registrarte
 router.post("/signup", signUp);
 
 //Ruta que te permite iniciar sesión
-router.post("/signin", signIn);
+router.post("/signin", verifyUser, signIn);
 
 //Ruta que te permite obtener un nuevo access token
 router.post("/refreshToken", refreshToken);

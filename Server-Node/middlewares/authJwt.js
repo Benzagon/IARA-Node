@@ -10,8 +10,7 @@ const authJwt = async (req, res, next) => {
 
     console.log(token);
 
-    if (token == null)
-      return res.status(401).json({ message: "El token no fue recibido" });
+    if (token === null)return res.status(401).json({ message: "El token no fue recibido" });
 
     const decoded = jwt.verify(token, process.env.SECRET);
 
@@ -21,8 +20,7 @@ const authJwt = async (req, res, next) => {
       req.user,
     ]);
 
-    if (result.length === 0)
-      return res.status(404).json("El token no es válido");
+    if (result.length === 0)return res.status(404).json("El token no es válido");
 
     next();
   } catch (error) {
