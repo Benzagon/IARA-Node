@@ -8,8 +8,8 @@ export const SendVerificationEmail = async (HospitalEmail) => {
             host: 'smtp-relay.sendinblue.com',
             port: 587,
             auth: {
-                user: process.env.EMAIL,
-                pass: process.env.SMTP_PASSWORD
+                user: email,
+                pass: password
             }
         })
     
@@ -38,5 +38,3 @@ export const SendVerificationEmail = async (HospitalEmail) => {
         console.log(error)
     }
 }
-
-SendVerificationEmail().then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
