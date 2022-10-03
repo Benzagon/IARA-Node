@@ -1,4 +1,4 @@
-/*import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
 
@@ -40,4 +40,3 @@ export const SendVerificationEmail = async (HospitalEmail) => {
 }
 
 SendVerificationEmail().then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
-*/

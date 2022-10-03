@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
 import fetch from 'node-fetch';
-//import { SendVerificationEmail } from '../libs/send.Email.js'
+import { SendVerificationEmail } from '../libs/send.Email.js'
 
 
 export const signUp = async (req, res) => {
@@ -31,48 +31,18 @@ export const signUp = async (req, res) => {
             
             id_hospitales = existingHospital[0].id
 
-            //SendVerificationEmail(HospitalEmail)
-
-            /*
-            const transport = nodemailer.createTransport({
-                host: 'smtp-relay.sendinblue.com',
-                port: 587,
-                auth: {
-                    user: process.env.EMAIL,
-                    pass: process.env.SMTP_PASSWORD
-                }
-            })
-
-            const handlebarsOptions = {
-                viewEngine: {
-                    extname: ".handlebars",
-                    partialsDir: path.resolve('./views'),
-                    defaultLayout: false
-                },
-                viewPath: path.resolve('./views'),
-                extName: ".handlebars"
-            }
-
-            transport.use('compile', hbs(handlebarsOptions))
-
-            const mailOptions = {
-                from: 'Verificación <iara.detector@gmail.com>',
-                to: HospitalEmail,
-                subject: 'Verificación',
-                template: 'email'
-            }
-
-            await transport.sendMail(mailOptions)
-            */
+            SendVerificationEmail(HospitalEmail)
             
             //Es poco usual pero es que sino me la complico más 
             //const response = await fetch('ruta del front')
 
             //const {roles} = await response.json();
 
-            //await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, roles , id_Hospital) VALUES (?, ?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, roles, id_hospitales])
+            const roles = "Usuario_Verificado"
 
-            await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
+            await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, roles , id_Hospital) VALUES (?, ?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, roles, id_hospitales])
+
+            //await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, id_Hospital) VALUES (?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, id_hospitales])
             
             return res.json({ message: "Nos estamos contactando con el hospital el cual corresponde el usuario con el objetivo de verificar su integridad" })
         }
@@ -85,37 +55,7 @@ export const signUp = async (req, res) => {
 
         id_hospitales = HospitalInserted[0].id
 
-        /*
-        const transport = nodemailer.createTransport({
-            host: 'smtp-relay.sendinblue.com',
-            port: 587,
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.SMTP_PASSWORD
-            }
-        })
-
-        const handlebarsOptions = {
-            viewEngine: {
-                extname: ".handlebars",
-                partialsDir: path.resolve('./views'),
-                defaultLayout: false
-            },
-            viewPath: path.resolve('./views'),
-            extName: ".handlebars"
-        }
-
-        transport.use('compile', hbs(handlebarsOptions))
-
-        const mailOptions = {
-            from: 'Verificación <iara.detector@gmail.com>',
-            to: HospitalEmail,
-            subject: 'Verificación',
-            template: 'email'
-        }
-
-        await transport.sendMail(mailOptions)
-        */
+        SendVerificationEmail(HospitalEmail)
         
         //Es poco usual pero es que sino me la complico más 
         //const response = await fetch('ruta del front')
