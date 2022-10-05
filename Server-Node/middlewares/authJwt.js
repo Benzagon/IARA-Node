@@ -4,15 +4,18 @@ import { pool } from "../db.js";
 
 const authJwt = async (req, res, next) => {
   try {
-    console.log(req.cookies);
 
-    const token = req.cookies.AccessToken;
+    const authHeader = req.headers['authorization'];
 
-    console.log(token);
+    console.log(authHeader)
 
-    if (token === null)return res.status(401).json({ message: "El token no fue recibido" });
+    const token = authHeader && authHeader.split(' ')[1]//Si tenenmos un authHeader continúa y devolveme el token nada más
 
-    const decoded = jwt.verify(token, process.env.SECRET);
+    console.log(token)
+
+    if (token == null)return res.sendStatus(401).json({ message: "El token no fue recibido" });
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     req.user = decoded.id;
 

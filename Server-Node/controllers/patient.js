@@ -7,9 +7,9 @@ export const uploadPatient = async (req, res) => {
         const {DNI} = req.body;
         const id_medico = req.user;
 
-        const[existingPatient] = await pool.query("SELECT * FROM paciente WHERE dni = ?", [DNI]);
+        const[existingPatient] = await pool.query("SELECT * FROM paciente WHERE dni = ? AND id_medico", [DNI, id_medico]);
         
-        if(existingPatient.length !== 0) return res.status(404).json({message: "El paciente ya existe"});
+        if(existingPatient.length !== 0) return res.status(409).json({message: "El paciente ya existe"});
 
         const [result] = await pool.query("INSERT INTO paciente (DNI, id_medico) VALUES (?,?)", [DNI, id_medico]);
 
@@ -70,7 +70,7 @@ export const updatePatient = async (req, res) => {
 
         await pool.query("UPDATE paciente SET DNI = ? WHERE id_medico = ? AND id = ?", [DNI, id_medico, id])
 
-        res.json({message: "El paciente ha sido actualizado con éxito"})
+        res.status(201).json({message: "El paciente ha sido actualizado con éxito"})
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -85,10 +85,10 @@ export const deletePatient = async (req, res) => {
         const[result] = await pool.query("DELETE FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id])
 
         if(result.affectedRows === 0){
-            return res.status(404).json({message: "El usuario no fue encontrado"})
+            return res.status(404).json({message: "El paciente no fue encontrado"})
         }
 
-        res.sendStatus(204).json({message: "El paciente ha sido removido con éxito"})
+        res.sendStatus(204)
     } catch (error) {
         res.status(500).json({message: error.message})
     }

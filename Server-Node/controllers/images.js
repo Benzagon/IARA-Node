@@ -27,30 +27,27 @@ export const uploadImage = async (req, res) => {
 
             await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, path, prediction_cnn, prediction_transformers, prediction_average, id_paciente])
 
-            return res.status(200).json({path, prediction_cnn, prediction_transformers, prediction_average})
+            return res.status(201).json({path, prediction_cnn, prediction_transformers, prediction_average})
         }
-        else
-        {
-            const response = await fetch('http://127.0.0.1:8000/predict_dicom',{
+
+        const response = await fetch('http://127.0.0.1:8000/predict_dicom',{
             method: 'post',
             body: JSON.stringify({path}),
             headers: {'Content-Type': 'application/json'}
-            })
+        })
 
-            await fs.remove(path)
+        await fs.remove(path)
 
-            const {prediction_cnn, prediction_transformers, prediction_average, new_path} = await response.json();
+        const {prediction_cnn, prediction_transformers, prediction_average, new_path} = await response.json();
 
-            console.log(prediction_cnn)
-            console.log(prediction_transformers)
-            console.log(prediction_average)
-            console.log(new_path)
+        console.log(prediction_cnn)
+        console.log(prediction_transformers)
+        console.log(prediction_average)
+        console.log(new_path)
 
-            await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, new_path, prediction_cnn, prediction_transformers, prediction_average, id_paciente])
+        await pool.query("INSERT INTO radiografias (nombre, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?)", [filename, new_path, prediction_cnn, prediction_transformers, prediction_average, id_paciente])
 
-            return res.status(200).json({new_path, prediction_cnn, prediction_transformers, prediction_average})
-        }
-        
+        res.status(201).json({new_path, prediction_cnn, prediction_transformers, prediction_average})
 
     } catch (error) {
         res.status(500).json({message: error.message})
@@ -118,7 +115,7 @@ export const deleteImage = async (req, res) => {
             return res.status(404).json({message: "La imagen no fue encontrada"})
         }
 
-        res.status(204).json({message: "La imagen ha sido eliminada correctamente"})
+        res.sendStatus(204)
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -128,7 +125,7 @@ export const sendFile = async(req, res) => {
         const imagePath = req.body.path
         console.log(imagePath)
 
-        res.status(200).sendFile(imagePath)
+        res.sendFile(imagePath)
     } catch (error) {
         res.status(500).json({message: error.message})
     }
