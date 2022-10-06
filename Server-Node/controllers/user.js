@@ -12,8 +12,9 @@ import { SendVerificationEmail } from '../libs/send.Email.js'
 export const signUp = async (req, res) => {
 
     try {
-
         const { firstName, lastName, email, password, confirmPassword, doctorId, HospitalEmail } = req.body
+
+        if(!firstName || !lastName || !email || !password || !confirmPassword || !doctorId || !HospitalEmail) return res.status(406).json({message: "Datos incompletos"})
 
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
 
@@ -210,3 +211,24 @@ export const updatePassword = async (req, res) => {
     }
 }
 
+export const editUser = async (req, res) => {
+    try {
+        const { firstName, lastName, doctorId } = req.body
+
+        const profileImagePath = req.file.path
+    
+        const [existingUser] = await pool.query("SELECT * FROM registro WHERE matricula = ?", [doctorId])
+
+        if(existingUser.length === 0) return res.status(404).json({message: "El usuario no fue encontrado"})
+
+        console.log(existingUser)
+    
+        const UserId = existingUser[0].id
+    
+        await pool.query("UPDATE registro SET nombre = ?, apellido = ?, matricula = ?, ruta = ? WHERE id = ?", [firstName, lastName, doctorId, profileImagePath, UserId])
+    
+        res.status(201).json({message: "El perfil ha sido actualizado con éxito"})
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}

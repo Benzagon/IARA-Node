@@ -9,9 +9,11 @@ import {
   logout,
   forgotPassword,
   updatePassword,
+  editUser
 } from "../controllers/user.js";
 
 import { verifyUser } from '../middlewares/verifyUser.js'
+import { upload } from '../middlewares/multer.js'
 
 //Ruta que te permite registrarte
 router.post("/signup", signUp);
@@ -28,5 +30,7 @@ router.delete("/logout", logout);
 router.post("/forgotPassword", forgotPassword);
 
 router.put("/updatePassword", updatePassword);
+
+router.put("/editUser", upload, editUser)
 
 export default router;
