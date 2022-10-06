@@ -491,6 +491,18 @@
 								"description": "Esta ruta esta destinada a simular la creación de una nueva contraseña para aquellos usuarios que se la olvidaron. Contiene las siguientes características:\n\n\\* Método utilizado: POST  \n\\* URL: http://localhost:4000/user/updatePassword  \n\\* Request: Una nueva contraseña y el id del usuario  \n\\* Response: Un mensaje que la contraseña ha sido actualizada con éxito"
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"id": "3a689ff5-6512-4735-8c5c-375450adb630",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					],
 					"id": "9b7e132e-bebb-4e83-8584-f4b96b0d2236",
