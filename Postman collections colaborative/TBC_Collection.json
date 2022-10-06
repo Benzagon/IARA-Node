@@ -493,7 +493,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Editar Usuario",
 							"id": "3a689ff5-6512-4735-8c5c-375450adb630",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
