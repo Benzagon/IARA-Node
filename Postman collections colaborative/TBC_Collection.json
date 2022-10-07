@@ -383,7 +383,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\" : \"Leo\", \r\n    \"lastName\": \"E\", \r\n    \"email\": \"pollsasassasaasasashasasajssasssasaaahxzxzsajsao@gmail.com\", \r\n    \"password\": \"LuissasaaSjksaASAsdsdsassasaaasasas\",\r\n    \"doctorId\": \"443905\",\r\n    \"HospitalEmail\": \"47205114@est.ort.edu.ar\"\r\n}",
+									"raw": "{\r\n    \"firstName\" : \"Leo\", \r\n    \"lastName\": \"E\", \r\n    \"email\": \"rodrigo1sasasa@gmail.com\", \r\n    \"password\": \"LuissasaaSjksaASAsdsdsassasaaasasas\",\r\n    \"confirmPassword\": \"LuissasaaSjksaASAsdsdsassasaaasasas\",\r\n    \"doctorId\": \"443905\",\r\n    \"HospitalEmail\": \"47205114@est.ort.edu.ar\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
