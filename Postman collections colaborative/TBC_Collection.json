@@ -204,6 +204,12 @@
 								"disableBodyPruning": true
 							},
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTIsImlhdCI6MTY2NDk5NjkzOCwiZXhwIjoxNjY0OTk3MDU4fQ.qBNlM_WEItef498-sBSEWGzgko6M4fXdWOCm5zL36W0"
+									}
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -214,7 +220,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"DNI\": \"45656432\"\r\n}",
+									"raw": "{\r\n    \"DNI\": \"6566434\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
