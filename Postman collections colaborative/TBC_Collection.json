@@ -359,6 +359,12 @@
 								"disableBodyPruning": true
 							},
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTIsImlhdCI6MTY2NDk5NzE3NSwiZXhwIjoxNjY0OTk3Mjk1fQ._fiNVGlOc4NqQqUw3vuykGomS0vdiFrKJnEi3jU3KOc"
+									}
+								},
 								"method": "GET",
 								"header": [],
 								"url": "http://localhost:4000/patient/uploadedRecently"
