@@ -40,6 +40,43 @@ export const SendVerificationEmail = async (Email) => {
     }
 }
 
+export const SendVerificationEmailWithGmail = async (Email) => {
+    try {
+        const transport = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.SMTP_PASSWORD
+            }
+        })
+    
+        const handlebarsOptions = {
+            viewEngine: {
+                extname: ".handlebars",
+                partialsDir: path.resolve('./views'),
+                defaultLayout: false
+            },
+            viewPath: path.resolve('./views'),
+            extName: ".handlebars"
+        }
+    
+        transport.use('compile', hbs(handlebarsOptions))
+    
+        const mailOptions = {
+            from: 'Verificación <iara.detector@gmail.com>',
+            to: Email,
+            subject: 'Verificación',
+            template: 'email'
+        }
+    
+        const sentEmail = await transport.sendMail(mailOptions)
+        return sentEmail
+    } catch (error) {
+        console.log(error)
+    }
+}
 export const SendVerificationEmailWithGmailApi = async (Email) => {
     try {
         const CLIENT_ID = '606708961766-ttag6051su85n61c05rfcq6nv0kp9p0e.apps.googleusercontent.com'

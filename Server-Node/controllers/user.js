@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import path from 'path'
 import fetch from 'node-fetch';
-import { SendVerificationEmail } from '../libs/send.Email.js'
+import { SendVerificationEmailWithGmail } from '../libs/send.Email.js'
 
 
 export const signUp = async (req, res) => {
@@ -14,7 +14,7 @@ export const signUp = async (req, res) => {
     try {
         const { firstName, lastName, email, password, confirmPassword, doctorId, HospitalEmail } = req.body
 
-        if(!firstName || !lastName || !email || !password || !confirmPassword || !doctorId || !HospitalEmail) return res.status(406).json({message: "Datos incompletos"})
+        //if(!firstName || !lastName || !email || !password || !confirmPassword || !doctorId || !HospitalEmail) return res.json({message: "Datos incompletos"})
 
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
 
@@ -34,7 +34,7 @@ export const signUp = async (req, res) => {
             
             id_hospitales = existingHospital[0].id
 
-            SendVerificationEmail(HospitalEmail).then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
+            SendVerificationEmailWithGmail(HospitalEmail).then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
 
             
             //Es poco usual pero es que sino me la complico más 
@@ -63,7 +63,7 @@ export const signUp = async (req, res) => {
 
         id_hospitales = HospitalInserted[0].id
 
-        SendVerificationEmail(HospitalEmail).then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
+        SendVerificationEmailWithGmail(HospitalEmail).then(sentEmail => console.log('Email sent...', sentEmail)).catch(error => console.log(error.message))
         
         //Es poco usual pero es que sino me la complico más 
         //const response = await fetch('ruta del front')
@@ -71,6 +71,7 @@ export const signUp = async (req, res) => {
         //const {roles} = await response.json();
 
         //await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, roles , id_Hospital) VALUES (?, ?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, roles, id_hospitales])
+        
         const roles = "Usuario_Verificado"
 
         const [saveUser] = await pool.query("INSERT INTO registro (nombre, apellido, email, contrasenia, matricula, roles, id_Hospital) VALUES (?, ?, ?, ?, ?, ?, ?)", [firstName, lastName, email, hashedPassword, doctorId, roles, id_hospitales])
@@ -96,17 +97,20 @@ export const signIn = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser[0].contrasenia)
 
+        console.log(isPasswordCorrect)
+
         if (!isPasswordCorrect) return res.status(401).json({ message: "La contraseña es inválida" })
 
-        const token = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "2m" })
+        const accessToken = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10s" })
 
-        const refreshToken = jwt.sign({ id: existingUser[0].id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1h" })
+        const refreshToken = jwt.sign({ id: existingUser[0].id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" })
 
-        console.log(token)
+        console.log(accessToken)
 
         console.log(refreshToken)
 
-        const serializeAccessToken = serialize('AccessToken', token, {
+        
+        /*const serializeAccessToken = serialize('AccessToken', accessToken, {
             httpOnly: true,
             expiresIn: 0,
             path: '/'
@@ -120,7 +124,27 @@ export const signIn = async (req, res) => {
             path: '/'
         })
 
-        return res.setHeader('Set-Cookie', [serializeAccessToken, serializeRefreshToken]).json({ message: "El usuario se ha logueado con éxito" })
+        res.setHeader('Set-Cookie', [serializeAccessToken, serializeRefreshToken]).json({ message: "El usuario se ha logueado con éxito" })
+        */
+        
+
+        /*const serializeRefreshToken = serialize('RefreshToken', refreshToken, {
+            httpOnly: true,
+            expiresIn: 0,
+            path: '/',
+            sameSite: 'none',
+            secure: true
+        })
+        */
+
+        const serializeRefreshToken = serialize('RefreshToken', refreshToken, {
+            httpOnly: true,
+            expiresIn: 0,
+            path: '/'
+        })
+
+        res.setHeader('Set-Cookie', serializeRefreshToken).json({ accessToken })
+        
 
 
     } catch (error) {
@@ -132,35 +156,45 @@ export const refreshToken = async (req, res) => {
 
     try {
 
+        console.log(req.cookies)
+
         const refreshToken = req.cookies.RefreshToken;
 
-        if (!refreshToken) return res.status(401).json("El usuario no está autenticado")
+        //console.log(refreshToken)
+
+        if (!refreshToken) return res.status(403).json({message: "El usuario no está auntenticado"})
 
         const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
+        console.log(decoded)
+
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE id = ?", [decoded.id])
 
-        if (existingUser.length === 0) return res.status(403).json("El token no es válido")
+        if (existingUser.length === 0) return res.status(403).json({message: "El token no es válido"})
 
-        const token = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "2m" })
+        const accessToken = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10s" })
 
-        const serializeAccessToken = serialize('AccessToken', token, {
+        /*const serializeAccessToken = serialize('AccessToken', accessToken, {
             httpOnly: true,
             expiresIn: 0,
             path: '/'
         })
 
         res.setHeader('Set-Cookie', serializeAccessToken).json({ message: "El nuevo access token ha sido creado correctamente" })
+        */
+        
+
+        res.json({ accessToken })
 
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        res.status(403).json({ message: "No estas autenticado" })
     }
 }
 
 export const logout = async (req, res) => {
 
     try {
-        const serializedAccessToken = serialize('AccessToken', null, {
+        /*const serializedAccessToken = serialize('AccessToken', null, {
             maxAge: 0,
             path: '/'
         })
@@ -172,6 +206,14 @@ export const logout = async (req, res) => {
         })
     
         res.status(204).setHeader('Set-Cookie', [serializedAccessToken, serializedRefreshToken]).json({message: "Se ha deslogueado correctamente"})
+        */
+
+        const serializedRefreshToken = serialize('RefreshToken', null, {
+            maxAge: 0,
+            path: '/'
+        })
+
+        res.status(204).setHeader('Set-Cookie', serializedRefreshToken).json({message: "Se ha deslogueado correctamente"})
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -186,7 +228,7 @@ export const forgotPassword = async (req, res) => {
         
         if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
 
-        SendVerificationEmail(email)
+        SendVerificationEmailWithGmail(email)
 
         res.status(201).json({
             id: existingEmail[0].id,
