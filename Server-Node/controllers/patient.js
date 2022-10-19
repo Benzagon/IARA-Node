@@ -303,7 +303,7 @@ export const getPatientUploadedRecently = async (req, res) => {
 
         console.log(id_medico)
 
-        const [pacientesRecientes] = await pool.query("SELECT id, dni, createdAt FROM paciente WHERE id_medico = ? ORDER BY createdAt DESC LIMIT 5", [id_medico])
+        const [pacientesRecientes] = await pool.query("SELECT id, DNI, createdAt FROM paciente WHERE id_medico = ? ORDER BY createdAt DESC LIMIT 5", [id_medico])
 
         pacientesRecientes.map((paciente) => paciente.createdAt = timeConverter(paciente.createdAt))
 
