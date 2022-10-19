@@ -101,9 +101,9 @@ export const signIn = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(401).json({ message: "La contraseña es inválida" })
 
-        const accessToken = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10s" })
+        const accessToken = jwt.sign({ id: existingUser[0].id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "2m" })
 
-        const refreshToken = jwt.sign({ id: existingUser[0].id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "15s" })
+        const refreshToken = jwt.sign({ id: existingUser[0].id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" })
 
         console.log(accessToken)
 
