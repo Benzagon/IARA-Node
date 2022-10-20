@@ -288,7 +288,7 @@ export const getPatientBySearch = async (req, res) => {
         const id_medico = req.user
         console.log(id_medico)
 
-        const [result] = await pool.query("SELECT id, dni FROM paciente WHERE id_medico = ? AND DNI LIKE CONCAT ('%', ?, '%')", [id_medico, DNI])
+        const [result] = await pool.query("SELECT id, DNI, createdAt FROM paciente WHERE id_medico = ? AND DNI LIKE CONCAT ('%', ?, '%')", [id_medico, DNI])
 
         res.json(result)
     } catch (error) {
