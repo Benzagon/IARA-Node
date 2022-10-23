@@ -285,7 +285,7 @@ export const userInfo = async (req, res) => {
     try {
         const id_medico = req.user
 
-        const [DoctorName] = await pool.query("SELECT id, nombre FROM registro WHERE id = ?", [id_medico])
+        const [DoctorName] = await pool.query("SELECT id, apellido FROM registro WHERE id = ?", [id_medico])
 
         res.json(DoctorName)
     } catch (error) {
