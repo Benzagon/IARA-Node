@@ -9,8 +9,11 @@ import {
   logout,
   forgotPassword,
   updatePassword,
-  editUser
+  editUser,
+  userInfo
 } from "../controllers/user.js";
+import auth from "../middlewares/authJwt.js";
+
 
 //import { verifyUser } from '../middlewares/verifyUser.js'
 import { upload } from '../middlewares/multer.js'
@@ -32,5 +35,7 @@ router.post("/forgotPassword", forgotPassword);
 router.put("/updatePassword", updatePassword);
 
 router.put("/editUser", upload, editUser)
+
+router.get('/userInfo', auth, userInfo)
 
 export default router;

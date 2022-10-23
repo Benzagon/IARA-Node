@@ -12,9 +12,11 @@ import { SendVerificationEmailWithGmail } from '../libs/send.Email.js'
 export const signUp = async (req, res) => {
 
     try {
+        console.log(req.body)
+
         const { firstName, lastName, email, password, confirmPassword, doctorId, HospitalEmail } = req.body
 
-        //if(!firstName || !lastName || !email || !password || !confirmPassword || !doctorId || !HospitalEmail) return res.json({message: "Datos incompletos"})
+        console.log(password)
 
         const [existingUser] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
 
@@ -29,8 +31,10 @@ export const signUp = async (req, res) => {
         if(existingHospital.length !== 0 && existingUser.length === 0){
 
             if(password !== confirmPassword) return res.status(401).json({ message: "Las contraseñas no son iguales" });
+
+            const salt = await bcrypt.genSalt(12);
                     
-            hashedPassword = await bcrypt.hash(password, 12)
+            hashedPassword = await bcrypt.hash(password, salt)
             
             id_hospitales = existingHospital[0].id
 
@@ -55,7 +59,9 @@ export const signUp = async (req, res) => {
 
         if(password !== confirmPassword) return res.status(401).json({ message: "Las contraseñas no son iguales" });
 
-        hashedPassword = await bcrypt.hash(password, 12)
+        const salt = await bcrypt.genSalt(12);
+
+        hashedPassword = await bcrypt.hash(password, salt)
 
         await pool.query("INSERT INTO hospitales (email) VALUES (?)", [HospitalEmail])
 
@@ -270,6 +276,18 @@ export const editUser = async (req, res) => {
         await pool.query("UPDATE registro SET nombre = ?, apellido = ?, matricula = ?, ruta = ? WHERE id = ?", [firstName, lastName, doctorId, profileImagePath, UserId])
     
         res.status(201).json({message: "El perfil ha sido actualizado con éxito"})
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const userInfo = async (req, res) => {
+    try {
+        const id_medico = req.user
+
+        const [DoctorName] = await pool.query("SELECT id, nombre FROM registro WHERE id = ?", [id_medico])
+
+        res.json(DoctorName)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
