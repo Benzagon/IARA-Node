@@ -235,6 +235,7 @@ export const deleteImage = async (req, res) => {
 
         res.sendStatus(204)
     } catch (error) {
+        console.log(error)
         res.status(500).json({message: error.message})
     }
 }
