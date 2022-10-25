@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-10-2022 a las 00:59:30
--- Versión del servidor: 8.0.17
--- Versión de PHP: 7.3.10
+-- Tiempo de generación: 25-10-2022 a las 12:24:35
+-- Versión del servidor: 5.7.17-log
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -106,7 +104,8 @@ INSERT INTO `hospitales` (`id`, `email`) VALUES
 (66, '4720511432ssasaaxzxz@est.ort.edu.ar'),
 (67, '4720511432ssasasaaxzxz@est.ort.edu.ar'),
 (68, '47205114sa@est.ort.edu.ar'),
-(69, '-1');
+(69, '-1'),
+(70, 'informes@maimonides.edu');
 
 -- --------------------------------------------------------
 
@@ -117,7 +116,7 @@ INSERT INTO `hospitales` (`id`, `email`) VALUES
 CREATE TABLE `paciente` (
   `id` int(11) NOT NULL,
   `DNI` int(8) NOT NULL,
-  `antecedentes` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `antecedentes` varchar(500) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_medico` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -175,10 +174,18 @@ INSERT INTO `paciente` (`id`, `DNI`, `antecedentes`, `createdAt`, `id_medico`) V
 (108, 4512121, '', '2022-10-17 18:56:44', 52),
 (109, 451212, '', '2022-10-17 18:57:16', 52),
 (157, 4568327, '', '2022-10-18 15:37:43', 52),
-(158, 47689076, '', '2022-10-18 16:09:53', 61),
 (159, 47689026, '', '2022-10-18 16:10:00', 61),
 (161, 345678, '', '2022-10-18 19:11:17', 61),
-(163, 46328764, '', '2022-10-18 20:29:51', 61);
+(163, 46328764, '', '2022-10-18 20:29:51', 61),
+(167, 46376437, '', '2022-10-19 16:24:37', 61),
+(168, 45678901, '', '2022-10-19 18:35:16', 61),
+(169, 45678909, '', '2022-10-19 18:35:19', 61),
+(170, 45678908, '', '2022-10-19 18:35:21', 61),
+(171, 4567890, '', '2022-10-19 18:35:21', 61),
+(172, 45678907, '', '2022-10-19 18:35:22', 61),
+(179, 65384756, '', '2022-10-24 15:35:08', 61),
+(180, 46919484, '', '2022-10-25 12:07:30', 61),
+(181, 46437714, '', '2022-10-25 12:19:15', 62);
 
 -- --------------------------------------------------------
 
@@ -188,13 +195,13 @@ INSERT INTO `paciente` (`id`, `DNI`, `antecedentes`, `createdAt`, `id_medico`) V
 
 CREATE TABLE `radiografias` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sintomas` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cloudinaryId` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ruta` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `prediccion_cnn` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `prediccion_transformers` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `prediccion_promedio` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `sintomas` varchar(40) NOT NULL,
+  `cloudinaryId` varchar(500) NOT NULL,
+  `ruta` varchar(500) NOT NULL,
+  `prediccion_cnn` varchar(7) NOT NULL,
+  `prediccion_transformers` varchar(7) NOT NULL,
+  `prediccion_promedio` varchar(7) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_Paciente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -332,7 +339,12 @@ INSERT INTO `radiografias` (`id`, `nombre`, `sintomas`, `cloudinaryId`, `ruta`, 
 (225, '94fae4f5-21d9-4800-8836-3396c2c0a55c.jpg', '', '', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666108999/imagenes/yn1y5jxq29adn1a8qzct.jpg', '98.7 %', '50.78 %', '74.74 %', '2022-10-18 16:03:18', 97),
 (226, 'a54ef1c0-0f75-40c1-afaa-e429ea02e14a.jpg', '', '', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666109041/imagenes/ht8qgavabdevnmg4hiko.jpg', '98.7 %', '50.78 %', '74.74 %', '2022-10-18 16:04:01', 97),
 (227, 'e0b9397a-f1d1-48a5-bd80-78b5a3cec295.jpg', '', '', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666109129/imagenes/g17eiw93xwltov0ob4cx.jpg', '98.7 %', '50.78 %', '74.74 %', '2022-10-18 16:05:29', 97),
-(228, 'd67a8acc-8753-4577-b038-13d27f8f5c9d.jpg', '', '', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666109475/imagenes/wp6zqmxvk2kkf5awzpnm.jpg', '98.7 %', '50.78 %', '74.74 %', '2022-10-18 16:11:14', 158);
+(273, 'c2dc9d29-a59f-4c9d-8e74-d65a43e23a0b.jpg', '', 'imagenes/lfuypxxouol6eu3z5sat', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666205429/imagenes/lfuypxxouol6eu3z5sat.jpg', '7.85 %', '50.94 %', '29.39 %', '2022-10-19 18:50:31', 159),
+(274, '6e242057-9578-4b6c-8d76-733375100720.jpg', '', 'imagenes/zdmmrqmfaxiz7b39kbxt', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666205435/imagenes/zdmmrqmfaxiz7b39kbxt.jpg', '5.42 %', '50.33 %', '27.88 %', '2022-10-19 18:50:37', 159),
+(275, '684f4ece-31f6-4050-9579-4d6ef6b0eb46.jpg', '', 'imagenes/t314l5hzt9frtkzaretw', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666696327/imagenes/t314l5hzt9frtkzaretw.jpg', '68.84 %', '42.11 %', '55.48 %', '2022-10-25 11:12:07', 159),
+(276, '33c49d58-41bb-47fd-bf61-e20273f17d9c.jpg', '', 'imagenes/vokop0sqsfmmtj9d9wg5', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666696328/imagenes/vokop0sqsfmmtj9d9wg5.jpg', '69.71 %', '48.45 %', '59.08 %', '2022-10-25 11:12:09', 159),
+(279, '6757432c-aca7-44e3-9cc1-da8d3911058a.jpg', '', 'imagenes/p7wixucejszkguele7hn', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666699710/imagenes/p7wixucejszkguele7hn.jpg', '96.39 %', '44.61 %', '70.5 %', '2022-10-25 12:08:30', 180),
+(280, '5e393045-b47d-4d16-9277-af8d5cc16e46.jpg', '', 'imagenes/xpkzjdzyxltde09jq0rz', 'http://res.cloudinary.com/dvqscievu/image/upload/v1666700398/imagenes/xpkzjdzyxltde09jq0rz.jpg', '97.54 %', '40.02 %', '68.78 %', '2022-10-25 12:19:58', 181);
 
 -- --------------------------------------------------------
 
@@ -415,7 +427,8 @@ INSERT INTO `registro` (`id`, `nombre`, `apellido`, `email`, `contrasenia`, `mat
 (57, 'Leo', 'E', 'rodrigo1sasasaSAsSAsaa@gmail.com', '$2a$12$JSfnqJRIjQVNpPNyatMHguZcoHlh6nds9EOS37qH2DOxbUIHv7c.O', 443905, 'Usuario_Verificado', 16),
 (58, 'Leo', 'E', 'pollo500@gmail.com', '$2a$12$OtQ078NSl95Yp8q74MbWYe07An7TopRTlcP6LPdCZItB1nZCCbswi', 443905, 'Usuario_Verificado', 16),
 (60, 'Benza', 'Gonzaquen', 'pollorico@gmail.com', '$2a$12$ptA9phLgCuo.xgIt4O17DecsWFOqAX4KZgqL8VmOHmahC4n3vEsLu', 345211, 'Usuario_Verificado', 69),
-(61, 'Ana', 'Pollo', 'Anapollo@gmail.com', '$2a$12$ce9zdHaN6W.XinMbTdL.7.F6D7zVat.imopnBEiBKDZd2Pe5c2CHG', 326908, 'Usuario_Verificado', 13);
+(61, 'Ana', 'Pollo', 'Anapollo@gmail.com', '$2a$12$ce9zdHaN6W.XinMbTdL.7.F6D7zVat.imopnBEiBKDZd2Pe5c2CHG', 326908, 'Usuario_Verificado', 13),
+(62, 'Ramiro', 'Zafran', 'rama@gmail.com', '$2a$12$yAQQP30jMjzWtBqp.quxDexDr7bm/mP5t.27EoDw.T4LQd0XoZj9.', 91, 'Usuario_Verificado', 70);
 
 --
 -- Índices para tablas volcadas
@@ -456,26 +469,22 @@ ALTER TABLE `registro`
 -- AUTO_INCREMENT de la tabla `hospitales`
 --
 ALTER TABLE `hospitales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 --
 -- AUTO_INCREMENT de la tabla `radiografias`
 --
 ALTER TABLE `radiografias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
 --
 -- AUTO_INCREMENT de la tabla `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- Restricciones para tablas volcadas
 --
@@ -484,7 +493,7 @@ ALTER TABLE `registro`
 -- Filtros para la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_medico`) REFERENCES `registro` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_medico`) REFERENCES `registro` (`id`);
 
 --
 -- Filtros para la tabla `radiografias`
@@ -497,7 +506,6 @@ ALTER TABLE `radiografias`
 --
 ALTER TABLE `registro`
   ADD CONSTRAINT `fk_hospital` FOREIGN KEY (`id_Hospital`) REFERENCES `hospitales` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
