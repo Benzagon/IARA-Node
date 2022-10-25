@@ -19,6 +19,8 @@ import auth from "../middlewares/authJwt.js";
 import { upload } from '../middlewares/multer.js'
 
 //Ruta que te permite registrarte
+router.get('/userInfo', auth, userInfo)
+
 router.post("/signup", signUp);
 
 //Ruta que te permite iniciar sesión
@@ -36,6 +38,5 @@ router.put("/updatePassword", updatePassword);
 
 router.put("/editUser", upload, editUser)
 
-router.get('/userInfo', auth, userInfo)
 
 export default router;

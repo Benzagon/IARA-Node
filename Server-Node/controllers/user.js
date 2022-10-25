@@ -193,7 +193,12 @@ export const refreshToken = async (req, res) => {
         res.json({ accessToken })
 
     } catch (error) {
-        res.status(403).json({ message: "No estas autenticado" })
+        const serializedRefreshToken = serialize('RefreshToken', null, {
+            maxAge: 0,
+            path: '/'
+        })
+        res.status(403).setHeader('Set-Cookie', serializedRefreshToken).json({ message: "No estas autenticado" })
+
     }
 }
 

@@ -219,6 +219,8 @@ export const deleteImage = async (req, res) => {
     try {
         const {id_paciente, id} = req.params
 
+        console.log(req.params)
+
         const [existingImage] = await pool.query("SELECT * FROM radiografias WHERE id_Paciente = ? AND id = ?", [id_paciente, id])
 
         console.log(existingImage[0].cloudinaryId)
