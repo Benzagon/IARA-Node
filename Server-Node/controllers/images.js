@@ -174,12 +174,12 @@ export const getImages = async (req, res) => {
     }
 }
 
-export const getImage = async (req, res) => {
+export const getRecentImage = async (req, res) => {
 
     try {
         console.log(req.params)
-        const {id_paciente, id} = req.params
-        const [result] = await pool.query("SELECT ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio FROM radiografias WHERE id_Paciente = ? AND id = ?", [id_paciente, id])
+        const {id_paciente} = req.params
+        const [result] = await pool.query("SELECT ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio FROM radiografias WHERE id_Paciente = ? ORDER BY createdAt DESC LIMIT 1", [id_paciente])
 
         if(result.length === 0){
             return res.status(404).json({message: "La imagen no fue encontrada"});

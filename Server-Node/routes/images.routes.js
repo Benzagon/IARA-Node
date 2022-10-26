@@ -4,10 +4,10 @@ const router = Router();
 import {
   uploadImage,
   getImages,
-  getImage,
   deleteImage,
   sendFile,
-  saveImageRoute
+  saveImageRoute,
+  getRecentImage
 } from "../controllers/images.js";
 import { upload } from "../middlewares/multer.js";
 import auth from "../middlewares/authJwt.js";
@@ -22,8 +22,10 @@ router.post("/images/saveImageRoute", upload, saveImageRoute);
 //Ruta que te permite obtener todas las imagenes que subiste
 router.get("/images/:id", auth, getImages);
 
+router.get("/recentImage/:id_paciente", auth, getRecentImage);
+
 //Ruta que te permite obtener solo una imagen
-router.get("/images/:id_paciente/:id", auth, getImage);
+//router.get("/images/:id_paciente/:id", auth, getImage);
 
 //router.put("/images/:id_paciente/:id", auth, updateImage)
 
