@@ -233,13 +233,15 @@ export const logout = async (req, res) => {
 export const forgotPassword = async (req, res) => {
 
     try {
-        const { email } = req.body
+        const { Email } = req.body
 
-        const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [email])
+        console.log(req.body)
+
+        const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [Email])
         
         if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
 
-        SendVerificationEmailWithGmail(email)
+        SendVerificationEmailWithGmail(Email)
 
         res.status(201).json({
             id: existingEmail[0].id,
@@ -252,9 +254,12 @@ export const forgotPassword = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
     try {
-        const {password, id} = req.body
+        const { Password, ConfirmPassword} = req.body
+        const { id } = req.params
 
-        const hashedPassword = await bcrypt.hash(password, 12)
+        if(Password !== ConfirmPassword) return res.status(401).json({ message: "Las contraseñas no son iguales" });
+
+        const hashedPassword = await bcrypt.hash(Password, 12)
 
         await pool.query("UPDATE registro SET contrasenia = ? WHERE id = ?", [hashedPassword, id])
 

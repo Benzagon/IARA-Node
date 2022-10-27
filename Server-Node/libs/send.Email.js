@@ -68,7 +68,7 @@ export const SendVerificationEmailWithGmail = async (Email) => {
             from: 'Verificación <iara.detector@gmail.com>',
             to: Email,
             subject: 'Verificación',
-            template: 'email'
+            template: 'ForgotPassword'
         }
     
         const sentEmail = await transport.sendMail(mailOptions)
