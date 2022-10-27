@@ -290,9 +290,9 @@ export const userInfo = async (req, res) => {
     try {
         const id_medico = req.user
 
-        const [DoctorName] = await pool.query("SELECT id, apellido FROM registro WHERE id = ?", [id_medico])
+        const [DoctorInfo] = await pool.query("SELECT registro.id, registro.nombre, registro.apellido, hospitales.email FROM registro INNER JOIN hospitales ON hospitales.id = registro.id_Hospital WHERE registro.id = ?", [id_medico])
 
-        res.json(DoctorName)
+        res.json(DoctorInfo)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
