@@ -238,13 +238,29 @@ export const deletePatient = async (req, res) => {
 
         const id_medico = req.user
 
-        const [result] = await pool.query("DELETE FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id])
+        const [existingImage] = await pool.query("SELECT * FROM radiografias WHERE id_Paciente", [id])
 
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: "El paciente no fue encontrado" })
+        if(existingImage.length === 0){
+            
+            const [result] = await pool.query("DELETE FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id])
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: "El paciente no fue encontrado" })
+            }
+
+            return res.sendStatus(204)
         }
 
-        res.sendStatus(204)
+        const deletePatientInfo = await Promise.all([
+            pool.query("DELETE FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id]),
+            pool.query("DELETE FROM radiografias WHERE id_Paciente", [id])
+        ])
+
+        console.log(deletePatientInfo)
+
+        return res.sendStatus(204)
+
+
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
