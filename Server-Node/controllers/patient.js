@@ -236,9 +236,15 @@ export const deletePatient = async (req, res) => {
     try {
         const { id } = req.params
 
+        console.log(id)
+
         const id_medico = req.user
 
-        const [existingImage] = await pool.query("SELECT * FROM radiografias WHERE id_Paciente", [id])
+        console.log(id_medico)
+
+        const [existingImage] = await pool.query("SELECT * FROM radiografias WHERE id_paciente = ?", [id])
+
+        console.log(existingImage)
 
         if(existingImage.length === 0){
             
@@ -253,7 +259,7 @@ export const deletePatient = async (req, res) => {
 
         const deletePatientInfo = await Promise.all([
             pool.query("DELETE FROM paciente WHERE id_medico = ? AND id = ?", [id_medico, id]),
-            pool.query("DELETE FROM radiografias WHERE id_Paciente", [id])
+            pool.query("DELETE FROM radiografias WHERE id_Paciente = ?", [id])
         ])
 
         console.log(deletePatientInfo)
