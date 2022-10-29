@@ -40,7 +40,7 @@ export const SendVerificationEmail = async (Email) => {
     }
 }
 
-export const SendVerificationEmailWithGmail = async (Email) => {
+export const SendVerificationEmailWithGmail = async (Email, id) => {
     try {
         const transport = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -68,7 +68,8 @@ export const SendVerificationEmailWithGmail = async (Email) => {
             from: 'Verificación <iara.detector@gmail.com>',
             to: Email,
             subject: 'Verificación',
-            template: 'ForgotPassword'
+            //template: 'ForgotPassword'
+            html: `"<html lang='es'> <head> <meta charset='UTF-8' /> <meta http-equiv='X-UA-Compatible' content='IE=edge' /> <meta name='viewport' content='width=device-width, initial-scale=1.0' /><title>Document</title><style>.container {background-color: black;}h1 {color: blue;}p {color: brown;}</style></head><body> <div class='container'><h1>title</h1><p>text</p> <a href="http://localhost:5173/updatePassword/${id}"><button>Recuperar contraseña</button></a>  </div></body></html>"`
         }
     
         const sentEmail = await transport.sendMail(mailOptions)

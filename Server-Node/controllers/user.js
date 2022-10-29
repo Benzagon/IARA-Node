@@ -238,13 +238,14 @@ export const forgotPassword = async (req, res) => {
         console.log(req.body)
 
         const [existingEmail] = await pool.query("SELECT * FROM registro WHERE email = ?", [Email])
+
+        const userId = existingEmail[0].id
         
         if (existingEmail.length === 0) return res.status(404).json({ message: "El email no existe" });
 
-        SendVerificationEmailWithGmail(Email)
+        SendVerificationEmailWithGmail(Email, userId)
 
         res.status(201).json({
-            id: existingEmail[0].id,
             message: "Ya hemos enviado un mail al email ingresado"
         })
     } catch (error) {
@@ -254,8 +255,11 @@ export const forgotPassword = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
     try {
-        const { Password, ConfirmPassword} = req.body
+        console.log(req.body)
+        const { Password, ConfirmPassword } = req.body
         const { id } = req.params
+
+        console.log(Password, ConfirmPassword)
 
         if(Password !== ConfirmPassword) return res.status(401).json({ message: "Las contraseñas no son iguales" });
 

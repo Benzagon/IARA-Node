@@ -34,7 +34,7 @@ router.delete("/logout", logout);
 
 router.post("/forgotPassword", forgotPassword);
 
-router.put("/updatePassword", updatePassword);
+router.put("/updatePassword/:id", updatePassword);
 
 router.put("/editUser", upload, editUser)
 
