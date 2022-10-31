@@ -11,9 +11,7 @@ export const uploadImage = async (req, res) => {
         const {id_paciente} = req.params;
         const filename = req.file.filename;
         const path = req.file.path;
-        const name = req.file.filename;
 
-        console.log(name)
 
 
         if(req.file.mimetype === 'image/jpeg'){
@@ -30,7 +28,25 @@ export const uploadImage = async (req, res) => {
             console.log(prediccion_promedio)
             console.log(new_path)
 
-            const uploadedImageToCloudinary = await uploadImageCloudinary(new_path)
+            if(new_path){
+                const uploadedImageToCloudinary = await uploadImageCloudinary(new_path)
+        
+                console.log(uploadedImageToCloudinary)
+    
+                const ruta = uploadedImageToCloudinary.url
+
+                const publicId = uploadedImageToCloudinary.public_id
+        
+                await fs.remove(path)
+
+                const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?)", [filename, ruta, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
+            
+                const id = InsertedImage.insertId
+
+                return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})
+            }
+
+            const uploadedImageToCloudinary = await uploadImageCloudinary(path)
         
             console.log(uploadedImageToCloudinary)
     
@@ -76,7 +92,7 @@ export const uploadImage = async (req, res) => {
 
         const id = InsertedImage.insertId
 
-        res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})
+        res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})  
 
     } catch (error) {
         console.log(error)
