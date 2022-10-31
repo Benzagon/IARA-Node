@@ -11,6 +11,9 @@ export const uploadImage = async (req, res) => {
         const {id_paciente} = req.params;
         const filename = req.file.filename;
         const path = req.file.path;
+        const name = req.file.filename;
+
+        console.log(name)
 
 
         if(req.file.mimetype === 'image/jpeg'){
@@ -20,13 +23,14 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
             })
 
-            const {prediccion_cnn, prediccion_transformers, prediccion_promedio} = await response.json();
+            const {prediccion_cnn, prediccion_transformers, prediccion_promedio, new_path} = await response.json();
 
             console.log(prediccion_cnn)
             console.log(prediccion_transformers)
             console.log(prediccion_promedio)
+            console.log(new_path)
 
-            const uploadedImageToCloudinary = await uploadImageCloudinary(path)
+            const uploadedImageToCloudinary = await uploadImageCloudinary(new_path)
         
             console.log(uploadedImageToCloudinary)
     
