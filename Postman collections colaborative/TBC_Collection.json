@@ -562,6 +562,19 @@
 						"url": "localhost:8000"
 					},
 					"response": []
+				},
+				{
+					"name": "http://localhost:3000/artistas/2/albumes ",
+					"id": "d4ddef5f-ef4c-4561-bb2e-7cb62df254e0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/artistas/2/albumes "
+					},
+					"response": []
 				}
 			],
 			"id": "0d89df27-ab85-43c0-ab53-75c79aff413a"
