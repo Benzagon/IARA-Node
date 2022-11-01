@@ -130,7 +130,7 @@ export const getPatients = async (req, res) => {
     try {
         const id_medico = req.user;
 
-        const [allPatients] = await pool.query("SELECT id, DNI, createdAt FROM paciente WHERE id_medico = ?", [id_medico]);
+        const [allPatients] = await pool.query("SELECT id, DNI, createdAt FROM paciente WHERE id_medico = ? ORDER BY createdAt DESC", [id_medico]);
 
         console.log(allPatients)
 
