@@ -21,29 +21,19 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
             })
 
-            const {prediccion_cnn, prediccion_transformers, prediccion_promedio, new_path} = await response.json();
+            const {prediccion_cnn, prediccion_transformers, prediccion_promedio, coordenadas} = await response.json();
 
             console.log(prediccion_cnn)
             console.log(prediccion_transformers)
             console.log(prediccion_promedio)
-            console.log(new_path)
+            console.log(coordenadas)
 
-            if(new_path){
-                const uploadedImageToCloudinary = await uploadImageCloudinary(new_path)
-        
-                console.log(uploadedImageToCloudinary)
-    
-                const ruta = uploadedImageToCloudinary.url
-
-                const publicId = uploadedImageToCloudinary.public_id
-        
-                await fs.remove(path)
-
-                const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?)", [filename, ruta, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
+            if(coordenadas){
+                const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, coordenadas, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [filename, ruta, coordenadas, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
             
                 const id = InsertedImage.insertId
 
-                return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})
+                return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, coordenadas})
             }
 
             const uploadedImageToCloudinary = await uploadImageCloudinary(path)
