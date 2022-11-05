@@ -21,19 +21,36 @@ export const uploadImage = async (req, res) => {
             headers: {'Content-Type': 'application/json'}
             })
 
-            const {prediccion_cnn, prediccion_transformers, prediccion_promedio, coordenadas} = await response.json();
+            const {prediccion_cnn, prediccion_transformers, prediccion_promedio, image_path} = await response.json();
 
             console.log(prediccion_cnn)
             console.log(prediccion_transformers)
             console.log(prediccion_promedio)
-            console.log(coordenadas)
+            console.log(image_path)
 
-            if(coordenadas){
-                const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, coordenadas, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [filename, ruta, coordenadas, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
-            
+            if(image_path){
+                
+                const uploadedImageToCloudinary = await uploadImageCloudinary(image_path)
+        
+                console.log(uploadedImageToCloudinary)
+    
+                const ruta = uploadedImageToCloudinary.url
+
+                const publicId = uploadedImageToCloudinary.public_id
+        
+                await fs.remove(path)
+
+                const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?)", [filename, ruta, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
+
                 const id = InsertedImage.insertId
 
-                return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio, coordenadas})
+                await fetch('http://127.0.0.1:8000/delete_path',{
+                    method: 'post',
+                    body: JSON.stringify({image_path}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+
+                return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})
             }
 
             const uploadedImageToCloudinary = await uploadImageCloudinary(path)
@@ -61,14 +78,34 @@ export const uploadImage = async (req, res) => {
 
         await fs.remove(path)
 
-        const {prediccion_cnn, prediccion_transformers, prediccion_promedio, new_path} = await response.json();
+        const {prediccion_cnn, prediccion_transformers, prediccion_promedio, image_path} = await response.json();
+
+        if(image_path){
+                
+            const uploadedImageToCloudinary = await uploadImageCloudinary(image_path)
+    
+            console.log(uploadedImageToCloudinary)
+
+            const ruta = uploadedImageToCloudinary.url
+
+            const publicId = uploadedImageToCloudinary.public_id
+    
+            await fs.remove(path)
+
+            const [InsertedImage] = await pool.query("INSERT INTO radiografias (nombre, ruta, cloudinaryId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_Paciente) VALUES (?, ?, ?, ?, ?, ?, ?)", [filename, ruta, publicId, prediccion_cnn, prediccion_transformers, prediccion_promedio, id_paciente])
+
+            const id = InsertedImage.insertId
+
+            return res.status(201).json({id, ruta, prediccion_cnn, prediccion_transformers, prediccion_promedio})
+        }
+
 
         console.log(prediccion_cnn)
         console.log(prediccion_transformers)
         console.log(prediccion_promedio)
-        console.log(new_path)
+        console.log(image_path)
 
-        const uploadedImageToCloudinary = await uploadImageCloudinary(new_path)
+        const uploadedImageToCloudinary = await uploadImageCloudinary(image_path)
         
         console.log(uploadedImageToCloudinary)
     
