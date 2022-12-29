@@ -572,7 +572,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/artistas/2/albumes "
+						"url": "http://localhost:3000/artistas/3/albumes "
 					},
 					"response": []
 				}
